@@ -1,6 +1,6 @@
 """Module defining line operations."""
 
-from typing import Tuple
+from typing import Tuple, List
 import matplotlib.pyplot as plt
 
 class Line:
@@ -12,6 +12,7 @@ class Line:
     def __init__(self, point1: Tuple, point2: Tuple):
         self.point1 = point1
         self.point2 = point2
+
 
 class LinePlotter:
     """Creates a figure environment, customizes it and plots the lines."""
@@ -36,6 +37,21 @@ class LinePlotter:
         """Convenience method to show the plots"""
         plt.show()
 
+
+class ProblemSetup():
+    """Class to pre-process the input data."""
+
+    @staticmethod
+    def read_input_file(file) -> List[float]:
+        pass
+
+    @staticmethod
+    def create_lines(inputs: List[float]) -> List[Line]:
+        pass
+
+    @staticmethod
+    def plot_input_lines(lines: List[Line]):
+        pass
 
 if __name__ == "__main__":
     line1 = Line((0, 0), (1, 1))
