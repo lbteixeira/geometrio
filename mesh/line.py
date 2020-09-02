@@ -43,15 +43,43 @@ class ProblemSetup():
 
     @staticmethod
     def read_input_file(file) -> List[float]:
-        pass
+        """Reads the input file containing the points coordinates.
+
+        Parameters
+        ----------
+        file : .txt
+            File to be read.
+
+        Returns
+        -------
+        inputs : List[float]
+            List with the coordinates of the points.
+        """
 
     @staticmethod
     def create_lines(inputs: List[float]) -> List[Line]:
-        pass
+        """Creates the lines based on the input file.
+
+        Parameters
+        ----------
+        inputs : List[float]
+            List with the coordinates of the points.
+        Returns
+        -------
+        lines: List[Line]
+            List of the created lines.
+        """
 
     @staticmethod
     def plot_input_lines(lines: List[Line]):
-        pass
+        """Plots the lines for visual inspection of the problem domain.
+
+        Parameters
+        ----------
+        lines : List[Line]
+            List of lines to be plotted.
+        """
+
 
 if __name__ == "__main__":
     line1 = Line((0, 0), (1, 1))
