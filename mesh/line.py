@@ -1,7 +1,10 @@
+"""Module defining line operations."""
+
 from typing import Tuple
 import matplotlib.pyplot as plt
 
 class Line:
+    """Class representing a line segment."""
 
     point1: Tuple
     point2: Tuple
@@ -29,6 +32,10 @@ class LinePlotter:
         coords_y = [line.point1[1], line.point2[1]]
         self.axes.plot(coords_x, coords_y)
 
+    def show_plot(self):
+        """Convenience method to show the plots"""
+        plt.show()
+
 
 if __name__ == "__main__":
     line1 = Line((0, 0), (1, 1))
@@ -36,4 +43,4 @@ if __name__ == "__main__":
     ptr = LinePlotter()
     ptr.plot_line(line1)
     ptr.plot_line(line2)
-    fig = ptr.fig.savefig("fig")
+    ptr.show_plot()
