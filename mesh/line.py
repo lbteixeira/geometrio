@@ -71,20 +71,21 @@ class ProblemSetup():
         """
 
     @staticmethod
-    def plot_input_lines(lines: List[Line]):
+    def plot_input_lines(lines_list: List[Line]):
         """Plots the lines for visual inspection of the problem domain.
 
         Parameters
         ----------
-        lines : List[Line]
+        lines_list : List[Line]
             List of lines to be plotted.
         """
 
+        plr = LinePlotter()
+        for line in lines_list:
+            plr.plot_line(line)
+
+        plr.show_plot()
+
 
 if __name__ == "__main__":
-    line1 = Line((0, 0), (1, 1))
-    line2 = Line((0, 5), (1, 1))
-    ptr = LinePlotter()
-    ptr.plot_line(line1)
-    ptr.plot_line(line2)
-    ptr.show_plot()
+    pass
