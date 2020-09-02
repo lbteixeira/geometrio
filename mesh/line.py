@@ -1,5 +1,6 @@
 """Module defining line operations."""
 
+
 from typing import Tuple, List
 import matplotlib.pyplot as plt
 
@@ -42,12 +43,12 @@ class ProblemSetup():
     """Class to pre-process the input data."""
 
     @staticmethod
-    def read_input_file(file) -> List[float]:
+    def read_input_file(input_file) -> List[float]:
         """Reads the input file containing the points coordinates.
 
         Parameters
         ----------
-        file : .txt
+        input_file : .txt
             File to be read.
 
         Returns
@@ -57,12 +58,12 @@ class ProblemSetup():
         """
 
     @staticmethod
-    def create_lines(inputs: List[float]) -> List[Line]:
+    def create_lines(input_list: List[float]) -> List[Line]:
         """Creates the lines based on the input file.
 
         Parameters
         ----------
-        inputs : List[float]
+        input_list : List[float]
             List with the coordinates of the points.
         Returns
         -------
