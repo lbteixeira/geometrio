@@ -79,6 +79,14 @@ class ProblemSetup():
             List of the created lines.
         """
 
+        lines_list = []
+        for coords in input_list:
+            new_line = Line((coords[0], coords[1]), (coords[2], coords[3]))
+            lines_list.append(new_line)
+
+        return lines_list
+
+
     @staticmethod
     def plot_input_lines(lines_list: List[Line]):
         """Plots the lines for visual inspection of the problem domain.
