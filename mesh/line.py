@@ -53,9 +53,17 @@ class ProblemSetup():
 
         Returns
         -------
-        inputs : List[float]
+        input_list : List[float]
             List with the coordinates of the points.
         """
+
+        input_list = []
+        with open(input_file, "r") as f:
+            for line in f:
+                coords = [int(x) for x in line.split()]
+                input_list.append(coords)
+
+        return input_list
 
     @staticmethod
     def create_lines(input_list: List[float]) -> List[Line]:
