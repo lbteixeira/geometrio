@@ -5,6 +5,7 @@ from typing import Tuple, List
 
 import matplotlib.pyplot as plt
 
+
 class Line:
     """Class representing a line segment."""
 
@@ -35,6 +36,8 @@ class Line:
         orien_4 = other_line.compute_orientation(self.point2)
 
         if (orien_1 * orien_2) < 0 and (orien_3 * orien_4) < 0:
+            intersection = True
+        elif (orien_1 * orien_2) == 0 and (orien_3 * orien_4) == 0:
             intersection = True
         else:
             intersection = False
@@ -165,10 +168,3 @@ class ProblemSetup():
             plr.plot_line(line)
 
         plr.show_plot()
-
-
-if __name__ == "__main__":
-    ps = ProblemSetup()
-    input_list = ps.read_input_file("..\\mesh\\tests\\data\\input_points.txt")
-    lines_list = ps.create_lines(input_list)
-    ps.plot_input_lines(lines_list)

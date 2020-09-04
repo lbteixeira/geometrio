@@ -51,10 +51,20 @@ def test_do_intersect():
 
     line1 = Line((0, 0), (1, 1))
     line2 = Line((0, 1), (1, 0))
+    line3 = Line((2, 2), (3, 0))
+    line4 = Line((0, 1), (0, 0))
+    line5 = Line((-0.5, 0.5), (0.5, 0.5))
+    line6 = Line((-0.5, -0.5), (0.5, -0.5))
+    line7 = Line((0, 0), (1, 0))
 
-    res_1 = line1.do_intersect(line2)
-    result = [res_1]
+    result_1 = line1.do_intersect(line2)
+    result_2 = line1.do_intersect(line3)
+    result_3 = line4.do_intersect(line5)
+    result_4 = line4.do_intersect(line6)
+    result_5 = line4.do_intersect(line7)
 
-    expected = [True]
-
-    assert result == expected
+    assert result_1
+    assert not result_2
+    assert result_3
+    assert not result_4
+    assert result_5
