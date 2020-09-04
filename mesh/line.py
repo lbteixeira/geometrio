@@ -30,8 +30,10 @@ class Line:
 
         return slope
 
-    def _compute_orientation(self, other_line, tolerance: float = 10**(-6)) -> int:
-        """Computes the orientation between two lines.
+    def _compute_orientation(self, point: Tuple) -> int:
+        """Computes the orientation between two segments.
+
+        The two segments are formed between a line (first segment) and a point.
 
         1 -> Clockwise
         -1 -> Counterclockwise
@@ -39,25 +41,24 @@ class Line:
 
         Parameters
         ----------
-        other_line : Line
-            Other line of the pair.
-
-        tolerance : float
-            Tolerance to verify if the slopes are the same.
+        point : Tuple
+            A point in the space.
 
         Returns
         -------
         orientation : int
-            Orientation of the line segments.
+            Orientation of the segments.
         """
 
-        slope_current = self.compute_line_slope()
-        slope_other = other_line.compute_line_slope()
-        slopes_difference = slope_current - slope_other
+        x1, y1 = self.point1
+        x2, y2 = self.point2
+        x3, y3 = point
 
-        if slopes_difference > (0 + tolerance * slopes_difference):
+        expression = (y2 - y1) * (x3 - x2) - (y3 - y2) * (x2 - x1)
+
+        if expression > 0:
             orientation = 1
-        elif slopes_difference < (0 - tolerance * slopes_difference):
+        elif expression < 0:
             orientation = -1
         else:
             orientation = 0
