@@ -2,6 +2,7 @@
 
 
 from typing import Tuple, List
+
 import matplotlib.pyplot as plt
 
 class Line:
@@ -13,6 +14,32 @@ class Line:
     def __init__(self, point1: Tuple, point2: Tuple):
         self.point1 = point1
         self.point2 = point2
+
+    def do_intersect(self, other_line) -> bool:
+        """Verifies if the current line segment intersects another line.
+
+        Parameters
+        ----------
+        other_line : Line
+            Line to have the intersection checked.
+
+        Returns
+        -------
+        intersection : bool
+            True if the lines intersect, False if they don't.
+        """
+
+        orientation_1 = self._compute_orientation(other_line.point1)
+        orientation_2 = self._compute_orientation(other_line.point2)
+        orientation_3 = other_line._compute_orientation(self.point1)
+        orientation_4 = other_line._compute_orientation(self.point2)
+
+        if (orientation_1 * orientation_2) < 0 and (orientation_3 * orientation_4) < 0:
+            intersection = True
+        else:
+            intersection = False
+
+        return intersection
 
     def _compute_orientation(self, point: Tuple) -> int:
         """Computes the orientation between two segments.

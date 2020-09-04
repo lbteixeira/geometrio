@@ -45,3 +45,16 @@ def test_compute_orientation():
     expected = [-1, 1, 0]
 
     assert result == expected
+
+def test_do_intersect():
+    """Test the method do_intersect."""
+
+    line1 = Line((0, 0), (1, 1))
+    line2 = Line((0, 1), (1, 0))
+
+    res_1 = line1.do_intersect(line2)
+    result = [res_1]
+
+    expected = [True]
+
+    assert result == expected
