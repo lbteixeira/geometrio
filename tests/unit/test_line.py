@@ -38,9 +38,9 @@ def test_compute_orientation():
     point2 = (0.5, -3)
     point3 = (0.5, 0.5)
 
-    result = [line1._compute_orientation(point1),
-              line1._compute_orientation(point2),
-              line1._compute_orientation(point3)]
+    result = [line1.compute_orientation(point1),
+              line1.compute_orientation(point2),
+              line1.compute_orientation(point3)]
 
     expected = [-1, 1, 0]
 

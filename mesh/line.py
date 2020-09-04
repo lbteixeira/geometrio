@@ -29,10 +29,10 @@ class Line:
             True if the lines intersect, False if they don't.
         """
 
-        orientation_1 = self._compute_orientation(other_line.point1)
-        orientation_2 = self._compute_orientation(other_line.point2)
-        orientation_3 = other_line._compute_orientation(self.point1)
-        orientation_4 = other_line._compute_orientation(self.point2)
+        orientation_1 = self.compute_orientation(other_line.point1)
+        orientation_2 = self.compute_orientation(other_line.point2)
+        orientation_3 = other_line.compute_orientation(self.point1)
+        orientation_4 = other_line.compute_orientation(self.point2)
 
         if (orientation_1 * orientation_2) < 0 and (orientation_3 * orientation_4) < 0:
             intersection = True
@@ -41,7 +41,7 @@ class Line:
 
         return intersection
 
-    def _compute_orientation(self, point: Tuple) -> int:
+    def compute_orientation(self, point: Tuple) -> int:
         """Computes the orientation between two segments.
 
         The two segments are formed between a line (first segment) and a point.
