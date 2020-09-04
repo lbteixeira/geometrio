@@ -45,9 +45,10 @@ class LinePlotter:
         line : Line
             Line to be plotted
         """
-        coords_x = [line.point1[0], line.point2[0]]
-        coords_y = [line.point1[1], line.point2[1]]
-        self.axes.plot(coords_x, coords_y)
+        x1, y1 = line.point1
+        x2, y2 = line.point2
+
+        self.axes.plot([x1, x2], [y1, y2])
 
     def show_plot(self):
         """Convenience method to show the plots"""
