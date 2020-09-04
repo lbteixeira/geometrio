@@ -14,6 +14,21 @@ class Line:
         self.point1 = point1
         self.point2 = point2
 
+    def _compute_line_slope(self) -> float:
+        """Computes the slope of a line.
+
+        Returns
+        -------
+        slope : float
+            Line slope.
+        """
+
+        x1, y1 = self.point1
+        x2, y2 = self.point2
+
+        slope = (y2 - y1) / (x2 - x1)
+
+        return slope
 
 class LinePlotter:
     """Creates a figure environment, customizes it and plots the lines."""
@@ -105,4 +120,7 @@ class ProblemSetup():
 
 
 if __name__ == "__main__":
-    pass
+    ps = ProblemSetup()
+    input_list = ps.read_input_file("..\\mesh\\tests\\data\\input_points.txt")
+    lines_list = ps.create_lines(input_list)
+    ps.plot_input_lines(lines_list)
