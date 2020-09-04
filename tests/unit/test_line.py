@@ -30,9 +30,22 @@ def test_create_lines():
 def test_compute_orientation():
     """Test the method _compute_orientation."""
 
+    line1 = Line((0, 0), (1, 1))
+    line2 = Line((1.3, 3), (1, 1))
+    line3 = Line((1.3, -3), (1, 1))
+    line4 = Line((2, 2), (3, 3))
+
+    result = [line1._compute_orientation(line2),
+              line1._compute_orientation(line3),
+              line1._compute_orientation(line4)]
+
+    expected = [-1, 1, 0]
+
+    assert result == expected
+
 def test_compute_line_slope():
     """Test the method _compute_line_slope."""
-    
+
     point1 = (0, 0)
     point2 = (1, 1)
     line = Line(point1, point2)

@@ -30,6 +30,41 @@ class Line:
 
         return slope
 
+    def _compute_orientation(self, other_line, tolerance: float = 10**(-6)) -> int:
+        """Computes the orientation between two lines.
+
+        1 -> Clockwise
+        -1 -> Counterclockwise
+        0 -> colinear
+
+        Parameters
+        ----------
+        other_line : Line
+            Other line of the pair.
+
+        tolerance : float
+            Tolerance to verify if the slopes are the same.
+
+        Returns
+        -------
+        orientation : int
+            Orientation of the line segments.
+        """
+
+        slope_current = self._compute_line_slope()
+        slope_other = other_line._compute_line_slope()
+        slopes_difference = slope_current - slope_other
+
+        if slopes_difference > (0 + tolerance * slopes_difference):
+            orientation = 1
+        elif slopes_difference < (0 - tolerance * slopes_difference):
+            orientation = -1
+        else:
+            orientation = 0
+
+        return orientation
+
+
 class LinePlotter:
     """Creates a figure environment, customizes it and plots the lines."""
 
