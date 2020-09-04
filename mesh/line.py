@@ -29,12 +29,12 @@ class Line:
             True if the lines intersect, False if they don't.
         """
 
-        orientation_1 = self.compute_orientation(other_line.point1)
-        orientation_2 = self.compute_orientation(other_line.point2)
-        orientation_3 = other_line.compute_orientation(self.point1)
-        orientation_4 = other_line.compute_orientation(self.point2)
+        orien_1 = self.compute_orientation(other_line.point1)
+        orien_2 = self.compute_orientation(other_line.point2)
+        orien_3 = other_line.compute_orientation(self.point1)
+        orien_4 = other_line.compute_orientation(self.point2)
 
-        if (orientation_1 * orientation_2) < 0 and (orientation_3 * orientation_4) < 0:
+        if (orien_1 * orien_2) < 0 and (orien_3 * orien_4) < 0:
             intersection = True
         else:
             intersection = False
