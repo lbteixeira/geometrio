@@ -45,17 +45,3 @@ def test_compute_orientation():
     expected = [-1, 1, 0]
 
     assert result == expected
-
-def test_compute_line_slope():
-    """Test the method _compute_line_slope."""
-
-    point1 = (0, 0)
-    point2 = (1, 1)
-    line = Line(point1, point2)
-
-    expected = 1
-    result = line.compute_line_slope()
-    assert result == expected
-
-if __name__ == "__main__":
-    test_compute_orientation()

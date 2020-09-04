@@ -14,22 +14,6 @@ class Line:
         self.point1 = point1
         self.point2 = point2
 
-    def compute_line_slope(self) -> float:
-        """Computes the slope of a line.
-
-        Returns
-        -------
-        slope : float
-            Line slope.
-        """
-
-        x1, y1 = self.point1
-        x2, y2 = self.point2
-
-        slope = (y2 - y1) / (x2 - x1)
-
-        return slope
-
     def _compute_orientation(self, point: Tuple) -> int:
         """Computes the orientation between two segments.
 
