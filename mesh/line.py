@@ -14,7 +14,7 @@ class Line:
         self.point1 = point1
         self.point2 = point2
 
-    def _compute_line_slope(self) -> float:
+    def compute_line_slope(self) -> float:
         """Computes the slope of a line.
 
         Returns
@@ -51,8 +51,8 @@ class Line:
             Orientation of the line segments.
         """
 
-        slope_current = self._compute_line_slope()
-        slope_other = other_line._compute_line_slope()
+        slope_current = self.compute_line_slope()
+        slope_other = other_line.compute_line_slope()
         slopes_difference = slope_current - slope_other
 
         if slopes_difference > (0 + tolerance * slopes_difference):

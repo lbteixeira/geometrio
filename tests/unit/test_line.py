@@ -51,5 +51,5 @@ def test_compute_line_slope():
     line = Line(point1, point2)
 
     expected = 1
-    result = line._compute_line_slope()
+    result = line.compute_line_slope()
     assert result == expected
