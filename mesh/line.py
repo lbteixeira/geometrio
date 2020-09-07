@@ -33,6 +33,7 @@ class Point:
 
         return smaller
 
+
 class Line:
     """Class representing a line segment."""
 
@@ -115,6 +116,32 @@ class Line:
             point = self.point2
 
         return point
+
+    def get_intersection_point(self, other_line) -> Point:
+        """Calculates the intersection point between two lines.
+
+        Parameters
+        ----------
+        other_line : Line
+
+        Returns
+        -------
+        Point
+            Point where the lines intersect
+        """
+
+        x1, y1 = self.point1.coord_x, self.point1.coord_y
+        x2, y2 = self.point2.coord_x, self.point2.coord_y
+        x3, y3 = other_line.point1.coord_x, other_line.point1.coord_y
+        x4, y4 = other_line.point2.coord_x, other_line.point2.coord_y
+
+        x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) \
+            / ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4))
+
+        y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) \
+            / ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4))
+
+        return Point(x, y)
 
     def do_intersect(self, other_line) -> bool:
         """Verifies if the current line segment intersects another line.

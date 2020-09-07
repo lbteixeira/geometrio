@@ -1,7 +1,25 @@
 """Module to test the functionalities of a line."""
 
+import numpy as np
+
 from mesh.line import ProblemSetup, Line, Point
 
+
+def test_get_intersection_point():
+    """Tests the function get_intersection_point."""
+
+    line1 = Line(Point(0, 0), Point(1, 1))
+    line2 = Line(Point(0, 1), Point(1, 0))
+    line3 = Line(Point(0, 1), Point(1, 1))
+    line4 = Line(Point(0, 0), Point(0, 1))
+    line5 = Line(Point(-1, 0), Point(1, 0))
+
+    expected = [Point(0.5, 0.5), Point(1, 1), Point(0, 0)]
+    result = [line1.get_intersection_point(line2), \
+              line1.get_intersection_point(line3), \
+              line4.get_intersection_point(line5)]
+
+    assert result == expected
 
 def test_point_equal():
     """Tests if the equality operator was correctly overriden."""
