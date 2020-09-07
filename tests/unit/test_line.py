@@ -3,6 +3,18 @@
 from mesh.line import ProblemSetup, Line, Point
 
 
+def test_point_equal():
+    """Tests if the equality operator was correctly overriden."""
+
+    p1 = Point(1, 1)
+    p2 = Point(1, 1)
+    p3 = Point(0, 1)
+    p4 = Point(1, 0)
+
+    assert p1 == p2
+    assert p1 != p3
+    assert p1 != p4
+
 def test_read_input_file():
     """Test the method read_input_file."""
 
