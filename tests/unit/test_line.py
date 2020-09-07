@@ -80,3 +80,19 @@ def test_line_equal():
     assert line1 == line2
     assert line1 != line3
     assert line1 != line4
+
+def test_get_point_highest_y():
+    """Test the function _get_point_highest_y."""
+
+    line1 = Line((0, 0), (1, 1))
+    line2 = Line((0, 1), (1, 0))
+
+    expected_1 = (1, 1)
+    expected_2 = (0, 1)
+
+    result_1 = line1._get_point_highest_y()
+    result_2 = line2._get_point_highest_y()
+
+    assert result_1 == expected_1
+    assert result_2 == expected_2
+

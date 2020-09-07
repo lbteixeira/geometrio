@@ -39,6 +39,51 @@ class Line:
 
         return x_p1 and y_p1 and x_p2 and y_p2
 
+    def __lt__(self, other_line) -> bool:
+        """Overrides the lower than operator.
+
+        Condition:
+            1. One line will be lower than the other if its y coordinate is lower
+            2. If the y coordinates are the same, the one with the smaller x
+            coordinate will be smaller
+
+        Parameters
+        ----------
+        other_line : Line
+            Line to be compared with the current line.
+
+        Returns
+        -------
+        True if the current line is smaller, False otherwise.
+        """
+
+        # if self.point1[1] < other_line.point1[1]:
+        #     return True
+        # elif self.point1[1] == other_line.point1[1] and self.point1[1] < other_line.point1[1]:
+        #     return True
+        # else:
+        #     return False
+
+    def _get_point_highest_y(self) -> Tuple:
+        """Verifies what is the point with higher y coordinate.
+
+        Parameters
+        ----------
+        line : Line
+
+        Returns
+        -------
+        point : Tuple
+            Point with higher y coordinate.
+        """
+
+        if self.point1[1] > self.point2[1]:
+            point = self.point1
+        else:
+            point = self.point2
+
+        return point
+
     def do_intersect(self, other_line) -> bool:
         """Verifies if the current line segment intersects another line.
 
