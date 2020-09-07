@@ -1,6 +1,9 @@
 """Module to implement the events and the events factory."""
 
 
+from abc import ABC, abstractmethod
+
+
 class EventsFactory():
     """Concrete creator for events objects."""
 
@@ -24,3 +27,32 @@ class EventsFactory():
             raise AssertionError("Event type not found")
         except AssertionError as _error:
             print(_error)
+
+
+class Events(ABC):
+    """Product interface for the events objects."""
+
+    @abstractmethod
+    def handle_event(self):
+        """Handles the event according to its type."""
+
+
+class StartPoint(Events):
+    """StartPoint event type."""
+
+    def handle_event(self):
+        pass
+
+
+class EndPoint(Events):
+    """EndPoint event type."""
+
+    def handle_event(self):
+        pass
+
+
+class Intersection(Events):
+    """Intersection event type."""
+
+    def handle_event(self):
+        pass
