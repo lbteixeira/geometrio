@@ -16,11 +16,22 @@ class Point:
         self.coord_x = x
         self.coord_y = y
 
-    def __eq__(self, other_point):
+    def __eq__(self, other_point) -> bool:
         x = self.coord_x == other_point.coord_x
         y = self.coord_y == other_point.coord_y
 
         return x and y
+
+    def __lt__(self, other_point) -> bool:
+        if self.coord_y < other_point.coord_y:
+            smaller = True
+        elif self.coord_y == other_point.coord_y and \
+             self.coord_x < other_point.coord_x:
+            smaller = True
+        else:
+            smaller = False
+
+        return smaller
 
 class Line:
     """Class representing a line segment."""
@@ -159,12 +170,9 @@ class Line:
             Orientation of the segments.
         """
 
-        x1 = self.point1.coord_x
-        y1 = self.point1.coord_y
-        x2 = self.point2.coord_x
-        y2 = self.point2.coord_y
-        x3 = point.coord_x
-        y3 = point.coord_y
+        x1, y1 = self.point1.coord_x, self.point1.coord_y
+        x2, y2 = self.point2.coord_x, self.point2.coord_y
+        x3, y3 = point.coord_x, point.coord_y
 
         expression = (y2 - y1) * (x3 - x2) - (y3 - y2) * (x2 - x1)
 
