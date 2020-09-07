@@ -54,15 +54,21 @@ class Line:
 
         Returns
         -------
-        True if the current line is smaller, False otherwise.
+        is_smaller : bool
+            True if the current line is smaller, False otherwise.
         """
 
-        # if self.point1[1] < other_line.point1[1]:
-        #     return True
-        # elif self.point1[1] == other_line.point1[1] and self.point1[1] < other_line.point1[1]:
-        #     return True
-        # else:
-        #     return False
+        point_current = self._get_point_highest_y()
+        point_other = other_line._get_point_highest_y()
+
+        if point_current[1] < point_other[1]:
+            is_smaller = True
+        elif point_current[1] == point_other[1] and point_current[0] < point_other[0]:
+            is_smaller = True
+        else:
+            is_smaller = False
+
+        return is_smaller
 
     def _get_point_highest_y(self) -> Tuple:
         """Verifies what is the point with higher y coordinate.
