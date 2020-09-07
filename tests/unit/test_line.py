@@ -1,6 +1,5 @@
 """Module to test the functionalities of a line."""
 
-import numpy as np
 
 from mesh.line import ProblemSetup, Line, Point
 

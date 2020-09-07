@@ -279,7 +279,6 @@ class ProblemSetup():
 
         return lines_list
 
-
     @staticmethod
     def plot_input_lines(lines_list: List[Line]):
         """Plots the lines for visual inspection of the problem domain.
