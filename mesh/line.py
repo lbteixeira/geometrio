@@ -26,7 +26,7 @@ class Point:
         if self.coord_y < other_point.coord_y:
             smaller = True
         elif self.coord_y == other_point.coord_y and \
-             self.coord_x < other_point.coord_x:
+             self.coord_x > other_point.coord_x:
             smaller = True
         else:
             smaller = False
@@ -83,8 +83,8 @@ class Line:
             True if the current line is smaller, False otherwise.
         """
 
-        point_current = self._get_point_highest_y()
-        point_other = other_line._get_point_highest_y()
+        point_current = self._get_highest_point()
+        point_other = other_line._get_highest_point()
 
         if point_current.coord_y < point_other.coord_y:
             is_smaller = True
@@ -96,7 +96,7 @@ class Line:
 
         return is_smaller
 
-    def _get_point_highest_y(self) -> Point:
+    def _get_highest_point(self) -> Point:
         """Verifies what is the point with higher y coordinate.
 
         if both point have the same y coordinate (horizontal line), returns
@@ -112,10 +112,7 @@ class Line:
             Point with higher y coordinate.
         """
 
-        if self.point1.coord_y > self.point2.coord_y:
-            point = self.point1
-        elif self.point1.coord_y == self.point2.coord_y and \
-             self.point1.coord_x < self.point2.coord_x:
+        if self.point2 < self.point1:
             point = self.point1
         else:
             point = self.point2

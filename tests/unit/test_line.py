@@ -24,7 +24,7 @@ def test_point_smaller():
     p4 = Point(1, 0)
 
     result = [p1 < p2, p1 < p3, p1 < p4]
-    expected = [False, True, False]
+    expected = [True, True, False]
 
     assert result == expected
 
@@ -109,20 +109,20 @@ def test_line_equal():
 def test_get_point_highest_y():
     """Test the function _get_point_highest_y."""
 
+    line1 = Line(Point(0, 0), Point(1, 1))
     line2 = Line(Point(0, 1), Point(1, 0))
     line3 = Line(Point(0, 1), Point(1, 1))
     line4 = Line(Point(1, 1), Point(0, 1))
-    line1 = Line(Point(0, 0), Point(1, 1))
 
     expected_1 = Point(1, 1)
     expected_2 = Point(0, 1)
     expected_3 = Point(0, 1)
     expected_4 = Point(0, 1)
 
-    result_1 = line1._get_point_highest_y()
-    result_2 = line2._get_point_highest_y()
-    result_3 = line3._get_point_highest_y()
-    result_4 = line4._get_point_highest_y()
+    result_1 = line1._get_highest_point()
+    result_2 = line2._get_highest_point()
+    result_3 = line3._get_highest_point()
+    result_4 = line4._get_highest_point()
 
     assert result_1 == expected_1
     assert result_2 == expected_2
