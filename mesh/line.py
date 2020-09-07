@@ -6,13 +6,29 @@ from typing import Tuple, List
 import matplotlib.pyplot as plt
 
 
+class Point:
+    """Class representing a point in the x-y space."""
+
+    coord_x: float
+    coord_y: float
+
+    def __init__(self, x: float, y: float):
+        self.coord_x = x
+        self.coord_y = y
+
+    def __eq__(self, other_point):
+        x = self.coord_x == other_point.coord_x
+        y = self.coord_y == other_point.coord_y
+
+        return x and y
+
 class Line:
     """Class representing a line segment."""
 
-    point1: Tuple
-    point2: Tuple
+    point1: Point
+    point2: Point
 
-    def __init__(self, point1: Tuple, point2: Tuple):
+    def __init__(self, point1: Point, point2: Point):
         self.point1 = point1
         self.point2 = point2
 
@@ -32,10 +48,10 @@ class Line:
         True if the coordinates are the same, False otherwise.
         """
 
-        x_p1 = self.point1[0] == other_line.point1[0]
-        y_p1 = self.point1[1] == other_line.point1[1]
-        x_p2 = self.point1[0] == other_line.point1[0]
-        y_p2 = self.point1[1] == other_line.point1[1]
+        x_p1 = self.point1.coord_x == other_line.point1.coord_x
+        y_p1 = self.point1.coord_y == other_line.point1.coord_y
+        x_p2 = self.point1.coord_x == other_line.point1.coord_x
+        y_p2 = self.point1.coord_y == other_line.point1.coord_y
 
         return x_p1 and y_p1 and x_p2 and y_p2
 
@@ -61,16 +77,17 @@ class Line:
         point_current = self._get_point_highest_y()
         point_other = other_line._get_point_highest_y()
 
-        if point_current[1] < point_other[1]:
+        if point_current.coord_y < point_other.coord_y:
             is_smaller = True
-        elif point_current[1] == point_other[1] and point_current[0] < point_other[0]:
+        elif point_current.coord_y == point_other.coord_y and \
+             point_current.coord_x < point_other.coord_x:
             is_smaller = True
         else:
             is_smaller = False
 
         return is_smaller
 
-    def _get_point_highest_y(self) -> Tuple:
+    def _get_point_highest_y(self) -> Point:
         """Verifies what is the point with higher y coordinate.
 
         if both point have the same y coordinate (horizontal line), returns
@@ -82,13 +99,14 @@ class Line:
 
         Returns
         -------
-        point : Tuple
+        point : Point
             Point with higher y coordinate.
         """
 
-        if self.point1[1] > self.point2[1]:
+        if self.point1.coord_y > self.point2.coord_y:
             point = self.point1
-        elif self.point1[1] == self.point2[1] and self.point1[0] < self.point2[0]:
+        elif self.point1.coord_y == self.point2.coord_y and \
+             self.point1.coord_x < self.point2.coord_x:
             point = self.point1
         else:
             point = self.point2
@@ -123,7 +141,7 @@ class Line:
 
         return intersection
 
-    def compute_orientation(self, point: Tuple) -> int:
+    def compute_orientation(self, point: Point) -> int:
         """Computes the orientation between two segments.
 
         The two segments are formed between a line (first segment) and a point.
@@ -134,7 +152,7 @@ class Line:
 
         Parameters
         ----------
-        point : Tuple
+        point : Point
             A point in the space.
 
         Returns
@@ -143,9 +161,12 @@ class Line:
             Orientation of the segments.
         """
 
-        x1, y1 = self.point1
-        x2, y2 = self.point2
-        x3, y3 = point
+        x1 = self.point1.coord_x
+        y1 = self.point1.coord_y
+        x2 = self.point2.coord_x
+        y2 = self.point2.coord_y
+        x3 = point.coord_x
+        y3 = point.coord_y
 
         expression = (y2 - y1) * (x3 - x2) - (y3 - y2) * (x2 - x1)
 
@@ -174,8 +195,8 @@ class LinePlotter:
         line : Line
             Line to be plotted
         """
-        x1, y1 = line.point1
-        x2, y2 = line.point2
+        x1, y1 = line.point1.coord_x, line.point1.coord_y
+        x2, y2 = line.point2.coord_x, line.point2.coord_y
 
         self.axes.plot([x1, x2], [y1, y2])
 
@@ -226,7 +247,7 @@ class ProblemSetup():
 
         lines_list = []
         for coords in input_list:
-            new_line = Line((coords[0], coords[1]), (coords[2], coords[3]))
+            new_line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
             lines_list.append(new_line)
 
         return lines_list

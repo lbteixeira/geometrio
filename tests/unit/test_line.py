@@ -1,6 +1,6 @@
 """Module to test the functionalities of a line."""
 
-from mesh.line import ProblemSetup, Line
+from mesh.line import ProblemSetup, Line, Point
 
 
 def test_read_input_file():
@@ -18,8 +18,8 @@ def test_create_lines():
     """Test the method create_lines."""
 
     input_list = [[91, 179, 760, 353], [874, 890, 648, 114]]
-    line1 = Line((91, 179), (760, 353))
-    line2 = Line((874, 890), (648, 114))
+    line1 = Line(Point(91, 179), Point(760, 353))
+    line2 = Line(Point(874, 890), Point(648, 114))
     problem = ProblemSetup()
 
     expected = [line1, line2]
@@ -32,11 +32,11 @@ def test_create_lines():
 def test_compute_orientation():
     """Test the method _compute_orientation."""
 
-    line1 = Line((0, 0), (1, 1))
+    line1 = Line(Point(0, 0), Point(1, 1))
 
-    point1 = (0.5, 3)
-    point2 = (0.5, -3)
-    point3 = (0.5, 0.5)
+    point1 = Point(0.5, 3)
+    point2 = Point(0.5, -3)
+    point3 = Point(0.5, 0.5)
 
     result = [line1.compute_orientation(point1),
               line1.compute_orientation(point2),
@@ -49,13 +49,13 @@ def test_compute_orientation():
 def test_do_intersect():
     """Test the method do_intersect."""
 
-    line1 = Line((0, 0), (1, 1))
-    line2 = Line((0, 1), (1, 0))
-    line3 = Line((2, 2), (3, 0))
-    line4 = Line((0, 1), (0, 0))
-    line5 = Line((-0.5, 0.5), (0.5, 0.5))
-    line6 = Line((-0.5, -0.5), (0.5, -0.5))
-    line7 = Line((0, 0), (1, 0))
+    line1 = Line(Point(0, 0), Point(1, 1))
+    line2 = Line(Point(0, 1), Point(1, 0))
+    line3 = Line(Point(2, 2), Point(3, 0))
+    line4 = Line(Point(0, 1), Point(0, 0))
+    line5 = Line(Point(-0.5, 0.5), Point(0.5, 0.5))
+    line6 = Line(Point(-0.5, -0.5), Point(0.5, -0.5))
+    line7 = Line(Point(0, 0), Point(1, 0))
 
     result_1 = line1.do_intersect(line2)
     result_2 = line1.do_intersect(line3)
@@ -72,10 +72,10 @@ def test_do_intersect():
 def test_line_equal():
     """Test if the equality operator was correctly overriden."""
 
-    line1 = Line((0, 0), (1, 1))
-    line2 = Line((0, 0), (1, 1))
-    line3 = Line((0, 1), (1, 1))
-    line4 = Line((0, 15), (15, 0))
+    line1 = Line(Point(0, 0), Point(1, 1))
+    line2 = Line(Point(0, 0), Point(1, 1))
+    line3 = Line(Point(0, 1), Point(1, 1))
+    line4 = Line(Point(0, 15), Point(15, 0))
 
     assert line1 == line2
     assert line1 != line3
@@ -84,15 +84,15 @@ def test_line_equal():
 def test_get_point_highest_y():
     """Test the function _get_point_highest_y."""
 
-    line1 = Line((0, 0), (1, 1))
-    line2 = Line((0, 1), (1, 0))
-    line3 = Line((0, 1), (1, 1))
-    line4 = Line((1, 1), (0, 1))
+    line2 = Line(Point(0, 1), Point(1, 0))
+    line3 = Line(Point(0, 1), Point(1, 1))
+    line4 = Line(Point(1, 1), Point(0, 1))
+    line1 = Line(Point(0, 0), Point(1, 1))
 
-    expected_1 = (1, 1)
-    expected_2 = (0, 1)
-    expected_3 = (0, 1)
-    expected_4 = (0, 1)
+    expected_1 = Point(1, 1)
+    expected_2 = Point(0, 1)
+    expected_3 = Point(0, 1)
+    expected_4 = Point(0, 1)
 
     result_1 = line1._get_point_highest_y()
     result_2 = line2._get_point_highest_y()
@@ -107,10 +107,10 @@ def test_get_point_highest_y():
 def test_line_smaller():
     """Test if the lower than operator was correctly overriden."""
 
-    line1 = Line((0, 0), (1, 1))
-    line2 = Line((0, 0), (1, 2))
-    line3 = Line((0, 1), (1, 1))
-    line4 = Line((0, 15), (15, 0))
+    line1 = Line(Point(0, 0), Point(1, 1))
+    line2 = Line(Point(0, 0), Point(1, 2))
+    line3 = Line(Point(0, 1), Point(1, 1))
+    line4 = Line(Point(0, 15), Point(15, 0))
 
     result = [line1 < line2, line1 < line3, line1 < line1, \
               line1 < line4, line3 < line4, line4 < line2]
