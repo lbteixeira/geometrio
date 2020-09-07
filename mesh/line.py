@@ -1,7 +1,7 @@
 """Module defining line operations."""
 
 
-from typing import Tuple, List
+from typing import List
 
 import matplotlib.pyplot as plt
 
@@ -48,12 +48,10 @@ class Line:
         True if the coordinates are the same, False otherwise.
         """
 
-        x_p1 = self.point1.coord_x == other_line.point1.coord_x
-        y_p1 = self.point1.coord_y == other_line.point1.coord_y
-        x_p2 = self.point1.coord_x == other_line.point1.coord_x
-        y_p2 = self.point1.coord_y == other_line.point1.coord_y
+        p1 = self.point1 == other_line.point1
+        p2 = self.point2 == other_line.point2
 
-        return x_p1 and y_p1 and x_p2 and y_p2
+        return p1 and p2
 
     def __lt__(self, other_line) -> bool:
         """Overrides the lower than operator.
