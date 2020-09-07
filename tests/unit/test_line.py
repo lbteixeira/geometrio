@@ -15,6 +15,19 @@ def test_point_equal():
     assert p1 != p3
     assert p1 != p4
 
+def test_point_smaller():
+    """Tests if the lower than operator was correctly overriden."""
+
+    p1 = Point(1, 1)
+    p2 = Point(0.5, 1)
+    p3 = Point(0, 5)
+    p4 = Point(1, 0)
+
+    result = [p1 < p2, p1 < p3, p1 < p4]
+    expected = [False, True, False]
+
+    assert result == expected
+
 def test_read_input_file():
     """Test the method read_input_file."""
 
