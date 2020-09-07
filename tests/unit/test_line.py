@@ -70,7 +70,7 @@ def test_do_intersect():
     assert result_5
 
 def test_line_equal():
-    """Test if the equality operator was correctly implemented."""
+    """Test if the equality operator was correctly overriden."""
 
     line1 = Line((0, 0), (1, 1))
     line2 = Line((0, 0), (1, 1))
@@ -86,13 +86,35 @@ def test_get_point_highest_y():
 
     line1 = Line((0, 0), (1, 1))
     line2 = Line((0, 1), (1, 0))
+    line3 = Line((0, 1), (1, 1))
+    line4 = Line((1, 1), (0, 1))
 
     expected_1 = (1, 1)
     expected_2 = (0, 1)
+    expected_3 = (0, 1)
+    expected_4 = (0, 1)
 
     result_1 = line1._get_point_highest_y()
     result_2 = line2._get_point_highest_y()
+    result_3 = line3._get_point_highest_y()
+    result_4 = line4._get_point_highest_y()
 
     assert result_1 == expected_1
     assert result_2 == expected_2
+    assert result_3 == expected_3
+    assert result_4 == expected_4
 
+def test_line_smaller():
+    """Test if the lower than operator was correctly overriden."""
+
+    line1 = Line((0, 0), (1, 1))
+    line2 = Line((0, 0), (1, 2))
+    line3 = Line((0, 1), (1, 1))
+    line4 = Line((0, 15), (15, 0))
+
+    result = [line1 < line2, line1 < line3, line1 < line1, \
+              line1 < line4, line3 < line4, line4 < line2]
+
+    expected = [True, False, False, True, True, False]
+
+    assert result == expected
