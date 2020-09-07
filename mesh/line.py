@@ -67,6 +67,9 @@ class Line:
     def _get_point_highest_y(self) -> Tuple:
         """Verifies what is the point with higher y coordinate.
 
+        if both point have the same y coordinate (horizontal line), returns
+        the point with smaller x coordinate.
+
         Parameters
         ----------
         line : Line
@@ -78,6 +81,8 @@ class Line:
         """
 
         if self.point1[1] > self.point2[1]:
+            point = self.point1
+        elif self.point1[1] == self.point2[1] and self.point1[0] < self.point2[0]:
             point = self.point1
         else:
             point = self.point2
