@@ -68,3 +68,15 @@ def test_do_intersect():
     assert result_3
     assert not result_4
     assert result_5
+
+def test_line_equal():
+    """Test if the equality operator was correctly implemented."""
+
+    line1 = Line((0, 0), (1, 1))
+    line2 = Line((0, 0), (1, 1))
+    line3 = Line((0, 1), (1, 1))
+    line4 = Line((0, 15), (15, 0))
+
+    assert line1 == line2
+    assert line1 != line3
+    assert line1 != line4
