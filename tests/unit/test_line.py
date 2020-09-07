@@ -140,6 +140,6 @@ def test_line_smaller():
     result = [line1 < line2, line1 < line3, line1 < line1, \
               line1 < line4, line3 < line4, line4 < line2]
 
-    expected = [True, False, False, True, True, False]
+    expected = [True, True, False, True, True, False]
 
     assert result == expected

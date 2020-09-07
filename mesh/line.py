@@ -86,10 +86,7 @@ class Line:
         point_current = self._get_highest_point()
         point_other = other_line._get_highest_point()
 
-        if point_current.coord_y < point_other.coord_y:
-            is_smaller = True
-        elif point_current.coord_y == point_other.coord_y and \
-             point_current.coord_x < point_other.coord_x:
+        if point_current < point_other:
             is_smaller = True
         else:
             is_smaller = False
