@@ -26,14 +26,3 @@ def brute_force(lines_list: List[Line]) -> int:
                 number_of_intersections += 1
 
     return int(number_of_intersections / 2)
-
-if __name__ == "__main__":
-    ps = ProblemSetup()
-    input_list = ps.read_input_file("..\\mesh\\tests\\data\\input_points.txt")
-    lines_list = ps.create_lines(input_list)
-    ps.plot_input_lines(lines_list)
-
-    eq = EventQueue(lines_list)
-
-    intersections = brute_force(lines_list)
-    print("Intersections: ", intersections)
