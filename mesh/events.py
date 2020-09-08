@@ -42,6 +42,9 @@ class Events():
     def __init__(self, point: Point):
         self.point = point
 
+    def __lt__(self, other_event):
+        return self.point < other_event.point
+
     @abstractmethod
     def handle_event(self):
         """Handles the event according to its type."""
