@@ -85,6 +85,10 @@ class Line:
         self.line_id = Line.line_count + 1
         Line.line_count += 1
 
+    def __eq__(self, other_line):
+        return self.point1 == other_line.point1 and \
+               self.point2 == other_line.point2
+
     def get_intersection_point(self, other_line) -> Point:
         """Calculates the intersection point between two lines.
 

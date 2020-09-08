@@ -131,3 +131,14 @@ def test_line_counting():
     assert line2.line_id == 2
     assert line3.line_id == 3
     assert Line.line_count == 3
+
+
+def test_line_equal():
+    """Tests the method to check if two lines are equal."""
+
+    line1 = Line(Point(0, 0), Point(1, 1))
+    line2 = Line(Point(0, 1), Point(1, 0))
+    line3 = Line(Point(0, 0), Point(1, 1))
+
+    assert line1 != line2
+    assert line1 == line3
