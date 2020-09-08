@@ -32,6 +32,6 @@ def line_sweep(lines_list: List[Line]):
 
     events = EventQueue(lines_list)
 
-    while events.events_queue:
-        new_event = events.events_queue.pop()
+    while events.queue:
+        new_event = events.queue.pop()
         new_event.handle_event()
