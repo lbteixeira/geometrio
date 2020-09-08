@@ -78,6 +78,9 @@ class Status:
 
     status_line: SortedList
 
+    def __init__(self):
+        self.status_line = SortedList()
+
 
 class EventQueue:
     """Class to represent the events queue. The main data structure is a sorted
