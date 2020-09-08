@@ -17,14 +17,14 @@ def test_create_event_queue():
     expected_points = [Point(648, 114), Point(91, 179), \
                        Point(760, 353), Point(874, 890)]
 
-    point1 = events.event_queue._getitem(0).point
-    point2 = events.event_queue._getitem(1).point
-    point3 = events.event_queue._getitem(2).point
-    point4 = events.event_queue._getitem(3).point
+    point1 = events.events_queue._getitem(0).point
+    point2 = events.events_queue._getitem(1).point
+    point3 = events.events_queue._getitem(2).point
+    point4 = events.events_queue._getitem(3).point
     result_points = [point1, point2, point3, point4]
 
-    assert isinstance(events.event_queue._getitem(0), EndPoint)
-    assert isinstance(events.event_queue._getitem(1), EndPoint)
-    assert isinstance(events.event_queue._getitem(2), StartPoint)
-    assert isinstance(events.event_queue._getitem(3), StartPoint)
+    assert isinstance(events.events_queue._getitem(0), EndPoint)
+    assert isinstance(events.events_queue._getitem(1), EndPoint)
+    assert isinstance(events.events_queue._getitem(2), StartPoint)
+    assert isinstance(events.events_queue._getitem(3), StartPoint)
     assert result_points == expected_points

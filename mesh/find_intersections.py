@@ -4,6 +4,8 @@ set of lines."""
 from typing import List
 
 from mesh.primitives import Line
+from mesh.events import EventQueue
+
 
 def brute_force(lines_list: List[Line]) -> int:
     """Brute force method. Verifies all line pairs.
@@ -25,3 +27,11 @@ def brute_force(lines_list: List[Line]) -> int:
                 number_of_intersections += 1
 
     return int(number_of_intersections / 2)
+
+def line_sweep(lines_list: List[Line]):
+
+    events = EventQueue(lines_list)
+
+    while events.events_queue:
+        new_event = events.events_queue.pop()
+        new_event.handle_event()

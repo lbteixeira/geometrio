@@ -78,14 +78,14 @@ class EventQueue:
     list.
     """
 
-    event_queue: SortedList
+    events_queue: SortedList
     status: SortedList
 
     def __init__(self, lines_list: List[Line]):
 
         self.status = SortedList()
 
-        self.event_queue = SortedList()
+        self.events_queue = SortedList()
         for line in lines_list:
             if line.point1 < line.point2:
                 point1, point2 = "EndPoint", "StartPoint"
@@ -95,5 +95,5 @@ class EventQueue:
             event_1 = EventsFactory.create_event(point1, line.point1)
             event_2 = EventsFactory.create_event(point2, line.point2)
 
-            self.event_queue.add(event_1)
-            self.event_queue.add(event_2)
+            self.events_queue.add(event_1)
+            self.events_queue.add(event_2)
