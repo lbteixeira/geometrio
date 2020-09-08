@@ -11,11 +11,31 @@ class Point:
         self.coord_x = x
         self.coord_y = y
 
-    def __eq__(self, other_point) -> bool:
-        x = self.coord_x == other_point.coord_x
-        y = self.coord_y == other_point.coord_y
+    def __eq__(self, other_point, tol: float = 10**(-6)) -> bool:
 
-        return x and y
+        x_is_equal = self._is_equal(self.coord_x, other_point.coord_x, tol)
+        y_is_equal = self._is_equal(self.coord_y, other_point.coord_y, tol)
+
+        return x_is_equal and y_is_equal
+
+    @staticmethod
+    def _is_equal(value1: float, value2: float, tol: float):
+        """Chacks if two values are equal within a given tolerance.
+
+        Parameters
+        ----------
+        value1 : float
+        value2 : float
+        tol : float
+            Tolerance
+        """
+
+        if value1 == 0:
+            is_equal = abs((value1 - value2)) < tol
+        else:
+            is_equal = abs((value1 - value2)) /  value1 < tol * value1
+
+        return is_equal
 
     def __lt__(self, other_point) -> bool:
         """Overrides the lower than operator.

@@ -1,4 +1,4 @@
-"""Module to test the functionalities of a line."""
+"""Module to test the functionalities of the primitives."""
 
 
 from mesh.primitives import Line, Point
@@ -29,9 +29,14 @@ def test_point_equal():
     p3 = Point(0, 1)
     p4 = Point(1, 0)
 
+    p5 = Point(1.000001, 0)
+    p6 = Point(1.00001, 0)
+
     assert p1 == p2
     assert p1 != p3
     assert p1 != p4
+    assert p4 == p5
+    assert p4 != p6
 
 def test_point_smaller():
     """Tests if the lower than operator was correctly overriden."""
