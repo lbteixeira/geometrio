@@ -4,6 +4,7 @@ set of lines."""
 from typing import List
 
 from mesh.line import Line, ProblemSetup
+from mesh.data_structures import EventQueue
 
 def brute_force(lines_list: List[Line]) -> int:
     """Brute force method. Verifies all line pairs.
@@ -31,6 +32,8 @@ if __name__ == "__main__":
     input_list = ps.read_input_file("..\\mesh\\tests\\data\\input_points.txt")
     lines_list = ps.create_lines(input_list)
     ps.plot_input_lines(lines_list)
+
+    eq = EventQueue(lines_list)
 
     intersections = brute_force(lines_list)
     print("Intersections: ", intersections)
