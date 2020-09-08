@@ -6,10 +6,14 @@ class Point:
 
     coord_x: float
     coord_y: float
+    point_id: int
+    point_count: int = 0
 
     def __init__(self, x: float, y: float):
         self.coord_x = x
         self.coord_y = y
+        self.point_id = Point.point_count
+        Point.point_count += 1
 
     def __eq__(self, other_point, tol: float = 10**(-6)) -> bool:
 
@@ -72,10 +76,14 @@ class Line:
 
     point1: Point
     point2: Point
+    line_id: int
+    line_count: int = 0
 
     def __init__(self, point1: Point, point2: Point):
         self.point1 = point1
         self.point2 = point2
+        self.line_id = Line.line_count
+        Line.line_count += 1
 
     def get_intersection_point(self, other_line) -> Point:
         """Calculates the intersection point between two lines.

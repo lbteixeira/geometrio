@@ -116,3 +116,18 @@ def test_do_intersect():
     assert result_3
     assert not result_4
     assert result_5
+
+
+def test_line_counting():
+    """Tests if the class variable to count the lines is updated."""
+
+    Line.line_count = 0
+
+    line1 = Line(Point(0, 0), Point(1, 1))
+    line2 = Line(Point(0, 1), Point(1, 0))
+    line3 = Line(Point(2, 2), Point(3, 0))
+
+    assert line1.line_id == 0
+    assert line2.line_id == 1
+    assert line3.line_id == 2
+    assert Line.line_count == 3
