@@ -21,7 +21,7 @@ class EventQueue:
 
         self.event_queue = SortedList()
         for line in lines_list:
-            if line.point1 > line.point2:
+            if line.point1 < line.point2:
                 p1, p2 = "EndPoint", "StartPoint"
             else:
                 p1, p2 = "StartPoint", "EndPoint"
