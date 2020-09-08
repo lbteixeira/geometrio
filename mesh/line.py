@@ -23,15 +23,33 @@ class Point:
         return x and y
 
     def __lt__(self, other_point) -> bool:
+        """Overrides the lower than operator.
+
+        Condition:
+            1. One point will be lower than the other if its y coordinate is lower
+            2. If the y coordinates are the same, the one with the smaller x
+            coordinate will be smaller
+
+        Parameters
+        ----------
+        other_point : Point
+            Point to be compared with the current point.
+
+        Returns
+        -------
+        is_smaller : bool
+            True if the current point is smaller, False otherwise.
+        """
+
         if self.coord_y < other_point.coord_y:
-            smaller = True
+            is_smaller = True
         elif self.coord_y == other_point.coord_y and \
              self.coord_x > other_point.coord_x:
-            smaller = True
+            is_smaller = True
         else:
-            smaller = False
+            is_smaller = False
 
-        return smaller
+        return is_smaller
 
 
 class Line:
