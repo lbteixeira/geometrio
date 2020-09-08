@@ -8,6 +8,18 @@ from sortedcontainers import SortedList
 from mesh.primitives import Point, Line
 
 
+def add_line_to_status(line: Line, status: SortedList):
+    """Inserts line to the status, if it's not already there.
+
+    Parameters
+    ----------
+    line : Line
+    status : SortedList
+    """
+    if line not in status:
+        status.add(line)
+
+
 class EventsFactory():
     """Concrete creator for events objects."""
 
@@ -69,11 +81,13 @@ class EndPoint(Events):
 class Intersection(Events):
     """Intersection event type."""
 
+    num_intersections: int = 0
+
     def handle_event(self):
-        pass
+        self.num_intersections += 1
 
 
-class EventQueue:
+class EventsQueue:
     """Class to represent the events queue. The main data structure is a sorted
     list.
     """
