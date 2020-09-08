@@ -89,6 +89,22 @@ class Line:
         return self.point1 == other_line.point1 and \
                self.point2 == other_line.point2
 
+    def __lt__(self, other_line):
+        higher_self = self._get_higher_point()
+        higher_other = other_line._get_higher_point()
+
+        if higher_self < higher_other:
+            return True
+        else:
+            return False
+
+    def _get_higher_point(self):
+
+        if self.point1 > self.point2:
+            return self.point1
+        else:
+            return self.point2
+
     def get_intersection_point(self, other_line) -> Point:
         """Calculates the intersection point between two lines.
 

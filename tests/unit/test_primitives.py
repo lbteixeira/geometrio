@@ -142,3 +142,15 @@ def test_line_equal():
 
     assert line1 != line2
     assert line1 == line3
+
+
+def test_line_smaller():
+    """Tests if __lt__ was correctly overrided."""
+
+    line1 = Line(Point(0, 0), Point(1, 1))
+    line2 = Line(Point(0, 1), Point(1, 0))
+    line3 = Line(Point(0, 0), Point(1, -1))
+
+    assert line2 > line1
+    assert line1 > line3
+    assert line3 < line2
