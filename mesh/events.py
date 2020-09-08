@@ -73,26 +73,17 @@ class Intersection(Events):
         pass
 
 
-class Status:
-    """Class to represent the sweep line status."""
-
-    status_line: SortedList
-
-    def __init__(self):
-        self.status_line = SortedList()
-
-
 class EventQueue:
     """Class to represent the events queue. The main data structure is a sorted
     list.
     """
 
     event_queue: SortedList
-    status: Status
+    status: SortedList
 
     def __init__(self, lines_list: List[Line]):
 
-        self.status = Status()
+        self.status = SortedList()
 
         self.event_queue = SortedList()
         for line in lines_list:
