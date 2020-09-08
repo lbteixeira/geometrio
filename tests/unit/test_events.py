@@ -1,9 +1,15 @@
-"""Module to test the events operations."""
+"""Module to test the events operations.
 
-from mesh.events import EventQueue
+TODO: Test add_line_to_status with computation errors
+"""
+
+
+from sortedcontainers import SortedList
+
+from mesh.events import EventsQueue
 from mesh.primitives import Line, Point
 
-from mesh.events import StartPoint, EndPoint
+from mesh.events import StartPoint, EndPoint, add_line_to_status
 
 def test_create_event_queue():
     """Tests if the event queue is created correctly, with all events in their
@@ -12,7 +18,7 @@ def test_create_event_queue():
     line1 = Line(Point(91, 179), Point(760, 353))
     line2 = Line(Point(874, 890), Point(648, 114))
 
-    events = EventQueue([line1, line2])
+    events = EventsQueue([line1, line2])
 
     expected_points = [Point(648, 114), Point(91, 179), \
                        Point(760, 353), Point(874, 890)]
@@ -28,3 +34,24 @@ def test_create_event_queue():
     assert isinstance(events.queue._getitem(2), StartPoint)
     assert isinstance(events.queue._getitem(3), StartPoint)
     assert result_points == expected_points
+
+
+def test_add_line_to_status():
+
+    status = SortedList()
+
+    line1 = Line(Point(91, 179), Point(760, 353))
+    line2 = Line(Point(874, 890), Point(648, 114))
+    line3 = Line(Point(91, 179), Point(760, 353))
+    line4 = Line(Point(91,179), Point(760, 353))
+    line5 = Line(Point(91.3,179.7), Point(760.645, 353.15446))
+    line6 = Line(Point(91.3,179.7), Point(760.645, 353.15446))
+
+    add_line_to_status(line1, status)
+    add_line_to_status(line2, status)
+    add_line_to_status(line3, status)
+    add_line_to_status(line4, status)
+    add_line_to_status(line5, status)
+    add_line_to_status(line6, status)
+
+    assert len(status) == 3
