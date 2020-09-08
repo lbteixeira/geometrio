@@ -57,27 +57,6 @@ class Line:
         self.point1 = point1
         self.point2 = point2
 
-    def __eq__(self, other_line) -> bool:
-        """Overrides the equality operator.
-
-        Two lines are said to be equal if and only if all coordinates of both
-        points are the same.
-
-        Parameters
-        ----------
-        other_line : Line
-            Line to be compared with the current line.
-
-        Returns
-        -------
-        True if the coordinates are the same, False otherwise.
-        """
-
-        p1 = self.point1 == other_line.point1
-        p2 = self.point2 == other_line.point2
-
-        return p1 and p2
-
     def get_intersection_point(self, other_line) -> Point:
         """Calculates the intersection point between two lines.
 
