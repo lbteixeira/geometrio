@@ -180,6 +180,20 @@ class LinePlotter:
         self.fig = plt.figure()
         self.axes = plt.axes()
 
+    def plot_input_lines(self, lines_list: List[Line]):
+        """Plots the lines for visual inspection of the problem domain.
+
+        Parameters
+        ----------
+        lines_list : List[Line]
+            List of lines to be plotted.
+        """
+
+        for line in lines_list:
+            self.plot_line(line)
+
+        plt.show()
+
     def plot_line(self, line: Line):
         """Plots a line in the figure.
 
@@ -192,10 +206,6 @@ class LinePlotter:
         x2, y2 = line.point2.coord_x, line.point2.coord_y
 
         self.axes.plot([x1, x2], [y1, y2])
-
-    def show_plot(self):
-        """Convenience method to show the plots"""
-        plt.show()
 
 
 class ProblemSetup():
@@ -244,19 +254,3 @@ class ProblemSetup():
             lines_list.append(new_line)
 
         return lines_list
-
-    @staticmethod
-    def plot_input_lines(lines_list: List[Line]):
-        """Plots the lines for visual inspection of the problem domain.
-
-        Parameters
-        ----------
-        lines_list : List[Line]
-            List of lines to be plotted.
-        """
-
-        plr = LinePlotter()
-        for line in lines_list:
-            plr.plot_line(line)
-
-        plr.show_plot()
