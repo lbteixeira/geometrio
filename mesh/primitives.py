@@ -37,7 +37,7 @@ class Point:
         if value1 == 0:
             is_equal = abs((value1 - value2)) < tol
         else:
-            is_equal = abs((value1 - value2)) /  value1 < tol * value1
+            is_equal = abs((value1 - value2)) /  value1 < tol
 
         return is_equal
 
