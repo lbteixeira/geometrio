@@ -1,7 +1,8 @@
 """Module to test the functionalities of a line."""
 
 
-from mesh.primitives import ProblemSetup, Line, Point
+from mesh.primitives import Line, Point
+from mesh.util import ProblemSetup
 
 
 def test_get_intersection_point():
