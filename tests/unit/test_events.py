@@ -1,9 +1,8 @@
-"""Module to test the main data structures of the problem: events queue and
-status.
-"""
+"""Module to test the events operations."""
 
-from mesh.data_structures import EventQueue
+from mesh.events import EventQueue
 from mesh.primitives import Line, Point
+
 from mesh.events import StartPoint, EndPoint
 
 def test_create_event_queue():
