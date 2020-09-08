@@ -2,6 +2,8 @@
 status.
 """
 
+from typing import List
+
 from sortedcontainers import SortedList
 
 from mesh.line import Line, Point
@@ -15,12 +17,17 @@ class EventQueue:
 
     event_queue: SortedList
 
-    def __init__(self, lines_list: Line):
+    def __init__(self, lines_list: List[Line]):
 
-        event_queue = SortedList()
+        self.event_queue = SortedList()
         for line in lines_list:
-            event_queue.add(ef.create_event("StartPoint", line.point1))
-            event_queue.add(ef.create_event("EndPoint", line.point2))
+            if line.point1 > line.point2:
+                p1, p2 = "EndPoint", "StartPoint"
+            else:
+                p1, p2 = "StartPoint", "EndPoint"
+
+            self.event_queue.add(ef.create_event(p1, line.point1))
+            self.event_queue.add(ef.create_event(p2, line.point2))
 
 
 if __name__ == "__main__":
