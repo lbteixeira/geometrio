@@ -6,7 +6,7 @@ from typing import List
 
 from sortedcontainers import SortedList
 
-from mesh.line import Line, Point
+from mesh.line import Line
 from mesh.events import EventsFactory as ef
 
 
@@ -28,8 +28,3 @@ class EventQueue:
 
             self.event_queue.add(ef.create_event(p1, line.point1))
             self.event_queue.add(ef.create_event(p2, line.point2))
-
-
-if __name__ == "__main__":
-    eq = EventQueue([Line(Point(1, 1), Point(0, 0))])
-    y = 1
