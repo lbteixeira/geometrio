@@ -12,19 +12,19 @@ def test_create_event_queue():
     line1 = Line(Point(91, 179), Point(760, 353))
     line2 = Line(Point(874, 890), Point(648, 114))
 
-    eq = EventQueue([line1, line2])
+    events = EventQueue([line1, line2])
 
     expected_points = [Point(648, 114), Point(91, 179), \
                        Point(760, 353), Point(874, 890)]
 
-    p1 = eq.event_queue._getitem(0).point
-    p2 = eq.event_queue._getitem(1).point
-    p3 = eq.event_queue._getitem(2).point
-    p4 = eq.event_queue._getitem(3).point
-    result_points = [p1, p2, p3, p4]
+    point1 = events.event_queue._getitem(0).point
+    point2 = events.event_queue._getitem(1).point
+    point3 = events.event_queue._getitem(2).point
+    point4 = events.event_queue._getitem(3).point
+    result_points = [point1, point2, point3, point4]
 
-    assert isinstance(eq.event_queue._getitem(0), EndPoint)
-    assert isinstance(eq.event_queue._getitem(1), EndPoint)
-    assert isinstance(eq.event_queue._getitem(2), StartPoint)
-    assert isinstance(eq.event_queue._getitem(3), StartPoint)
+    assert isinstance(events.event_queue._getitem(0), EndPoint)
+    assert isinstance(events.event_queue._getitem(1), EndPoint)
+    assert isinstance(events.event_queue._getitem(2), StartPoint)
+    assert isinstance(events.event_queue._getitem(3), StartPoint)
     assert result_points == expected_points

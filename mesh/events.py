@@ -85,12 +85,12 @@ class EventQueue:
         self.event_queue = SortedList()
         for line in lines_list:
             if line.point1 < line.point2:
-                p1, p2 = "EndPoint", "StartPoint"
+                point1, point2 = "EndPoint", "StartPoint"
             else:
-                p1, p2 = "StartPoint", "EndPoint"
+                point1, point2 = "StartPoint", "EndPoint"
 
-            event_1 = EventsFactory.create_event(p1, line.point1)
-            event_2 = EventsFactory.create_event(p2, line.point2)
+            event_1 = EventsFactory.create_event(point1, line.point1)
+            event_2 = EventsFactory.create_event(point2, line.point2)
 
             self.event_queue.add(event_1)
             self.event_queue.add(event_2)
