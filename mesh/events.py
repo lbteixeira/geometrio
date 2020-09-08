@@ -94,3 +94,9 @@ class EventQueue:
 
             self.event_queue.add(event_1)
             self.event_queue.add(event_2)
+
+
+class Status:
+    """Class to represent the sweep line status."""
+
+    status_line: SortedList
