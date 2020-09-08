@@ -4,7 +4,7 @@ set of lines."""
 from typing import List
 
 from mesh.primitives import Line
-from mesh.events import EventQueue
+from mesh.events import EventsQueue
 
 
 def brute_force(lines_list: List[Line]) -> int:
@@ -30,7 +30,7 @@ def brute_force(lines_list: List[Line]) -> int:
 
 def line_sweep(lines_list: List[Line]):
 
-    events = EventQueue(lines_list)
+    events = EventsQueue(lines_list)
 
     while events.queue:
         new_event = events.queue.pop()
