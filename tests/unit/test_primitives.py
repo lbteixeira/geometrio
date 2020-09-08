@@ -127,7 +127,7 @@ def test_line_counting():
     line2 = Line(Point(0, 1), Point(1, 0))
     line3 = Line(Point(2, 2), Point(3, 0))
 
-    assert line1.line_id == 0
-    assert line2.line_id == 1
-    assert line3.line_id == 2
+    assert line1.line_id == 1
+    assert line2.line_id == 2
+    assert line3.line_id == 3
     assert Line.line_count == 3
