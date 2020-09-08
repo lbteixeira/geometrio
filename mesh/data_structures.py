@@ -6,7 +6,7 @@ from typing import List
 
 from sortedcontainers import SortedList
 
-from mesh.line import Line
+from mesh.primitives import Line
 from mesh.events import EventsFactory as ef
 
 

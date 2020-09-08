@@ -3,7 +3,7 @@
 
 from abc import abstractmethod
 
-from mesh.line import Point
+from mesh.primitives import Point
 
 
 class EventsFactory():

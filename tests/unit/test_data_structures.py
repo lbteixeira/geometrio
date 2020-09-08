@@ -3,7 +3,7 @@ status.
 """
 
 from mesh.data_structures import EventQueue
-from mesh.line import Line, Point
+from mesh.primitives import Line, Point
 from mesh.events import StartPoint, EndPoint
 
 def test_create_event_queue():

@@ -3,7 +3,7 @@ set of lines."""
 
 from typing import List
 
-from mesh.line import Line
+from mesh.primitives import Line
 
 def brute_force(lines_list: List[Line]) -> int:
     """Brute force method. Verifies all line pairs.

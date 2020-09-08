@@ -1,7 +1,7 @@
 """Module to test the algorithms to find intersections between lines."""
 
 from mesh.find_intersections import brute_force
-from mesh.line import ProblemSetup
+from mesh.primitives import ProblemSetup
 
 
 def test_brute_force():
