@@ -85,11 +85,11 @@ class Line:
         self.line_id = Line.line_count + 1
         Line.line_count += 1
 
-    def __eq__(self, other_line):
+    def __eq__(self, other_line) -> bool:
         return self.point1 == other_line.point1 and \
                self.point2 == other_line.point2
 
-    def __lt__(self, other_line):
+    def __lt__(self, other_line) -> bool:
         higher_self = self._get_higher_point()
         higher_other = other_line._get_higher_point()
 
@@ -98,7 +98,7 @@ class Line:
         else:
             return False
 
-    def _get_higher_point(self):
+    def _get_higher_point(self) -> Point:
 
         if self.point1 > self.point2:
             return self.point1

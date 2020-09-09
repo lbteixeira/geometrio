@@ -122,20 +122,27 @@ class EventsQueue:
 
     queue: SortedList
     status: SortedList
+    events_factory: EventsFactory
+    lines_list: List[Line]
 
     def __init__(self, lines_list: List[Line]):
-
         self.status = SortedList()
-
+        self.events_factory = EventsFactory()
         self.queue = SortedList()
-        for line in lines_list:
+        self.lines_list = lines_list
+        self.initialize()
+
+    def initialize(self):
+        """Initializes the events queue."""
+
+        for line in self.lines_list:
             if line.point1 < line.point2:
                 point1, point2 = "EndPoint", "StartPoint"
             else:
                 point1, point2 = "StartPoint", "EndPoint"
 
-            event_1 = EventsFactory.create_event(point1, line.point1)
-            event_2 = EventsFactory.create_event(point2, line.point2)
+            event_1 = self.events_factory.create_event(point1, line.point1)
+            event_2 = self.events_factory.create_event(point2, line.point2)
 
             self.queue.add(event_1)
             self.queue.add(event_2)
