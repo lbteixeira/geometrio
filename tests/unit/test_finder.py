@@ -1,6 +1,6 @@
 """Module to test the algorithms to find intersections between lines."""
 
-from mesh.find_intersections import IntersectionFinder
+from mesh.finder import IntersectionFinder
 from mesh.util import ProblemSetup
 
 
