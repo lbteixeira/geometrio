@@ -1,8 +1,8 @@
 """Module to test the functionalities of the primitives."""
 
 
-from mesh.primitives import Line, Point
-from mesh.util import ProblemSetup
+from geometrio.primitives import Line, Point
+from geometrio.util import ProblemSetup
 
 
 def test_get_intersection_point():

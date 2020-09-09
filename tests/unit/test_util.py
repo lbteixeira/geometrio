@@ -1,13 +1,13 @@
 """Module to test the utility functions."""
 
-from mesh.util import ProblemSetup
-from mesh.primitives import Point, Line
+from geometrio.util import ProblemSetup
+from geometrio.primitives import Point, Line
 
 
 def test_create_lines():
     """Test the method create_lines."""
 
-    input_file = "..\\mesh\\tests\\data\\input_points.txt"
+    input_file = "..\\geometrio\\tests\\data\\input_points.txt"
 
     line1 = Line(Point(91, 179), Point(760, 353))
     line2 = Line(Point(874, 890), Point(648, 114))

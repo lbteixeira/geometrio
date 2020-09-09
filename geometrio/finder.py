@@ -3,8 +3,8 @@ set of lines."""
 
 from typing import List
 
-from mesh.primitives import Line
-from mesh.events import EventsQueue
+from geometrio.primitives import Line
+from geometrio.events import EventsQueue
 
 
 class IntersectionFinder():
