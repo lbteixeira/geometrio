@@ -6,11 +6,11 @@ TODO: Test add_line_to_status with computation errors
 
 from sortedcontainers import SortedList
 
-from geometrio.events import EventsQueue
-from geometrio.primitives import Line, Point
+from geometrio.intersections.events import EventsQueue
+from geometrio.intersections.primitives import Line, Point
 
-from geometrio.events import StartPoint, EndPoint
-from geometrio.events import EventsOperations as eo
+from geometrio.intersections.events import StartPoint, EndPoint
+from geometrio.intersections.events import EventsOperations as eo
 
 def test_create_event_queue():
     """Tests if the event queue is created correctly, with all events in their

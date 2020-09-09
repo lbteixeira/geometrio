@@ -1,7 +1,7 @@
 """Module to test the utility functions."""
 
-from geometrio.util import ProblemSetup
-from geometrio.primitives import Point, Line
+from geometrio.intersections.util import ProblemSetup
+from geometrio.intersections.primitives import Point, Line
 
 
 def test_create_lines():

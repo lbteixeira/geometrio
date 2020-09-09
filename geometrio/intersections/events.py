@@ -5,7 +5,7 @@ from abc import abstractmethod
 
 from sortedcontainers import SortedList
 
-from geometrio.primitives import Point, Line
+from geometrio.intersections.primitives import Point, Line
 
 
 class EventsOperations():
