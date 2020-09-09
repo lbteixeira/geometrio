@@ -8,16 +8,42 @@ from sortedcontainers import SortedList
 from mesh.primitives import Point, Line
 
 
-def add_line_to_status(line: Line, status: SortedList):
-    """Inserts line to the status, if it's not already there.
+class EventsOperations():
+    """Defines operations the events can use when they are handled."""
 
-    Parameters
-    ----------
-    line : Line
-    status : SortedList
-    """
-    if line not in status:
-        status.add(line)
+    @staticmethod
+    def add_line_to_status(line: Line, status: SortedList):
+        """Inserts line to the status, if it's not already there.
+
+        Parameters
+        ----------
+        line : Line
+        status : SortedList
+        """
+        if line not in status:
+            status.add(line)
+
+    @staticmethod
+    def check_which_line(point: Point) -> int:
+        """Checks to which line a point is part of.
+
+        TODO: verify case where two lines share a point.
+
+        Parameters
+        ----------
+        point : Point
+
+        Returns
+        -------
+        line_id: int
+        """
+
+        if point.point_id % 2 != 0:
+            line_id = (point.point_id + 1) / 2
+        else:
+            line_id = point.point_id / 2
+
+        return line_id
 
 
 class EventsFactory():
@@ -52,9 +78,11 @@ class Events():
     """Product interface for the events objects."""
 
     point: Point
+    operation: EventsOperations
 
     def __init__(self, point: Point):
         self.point = point
+        self.operation = EventsOperations()
 
     def __lt__(self, other_event):
         return self.point < other_event.point

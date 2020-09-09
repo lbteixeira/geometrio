@@ -9,7 +9,8 @@ from sortedcontainers import SortedList
 from mesh.events import EventsQueue
 from mesh.primitives import Line, Point
 
-from mesh.events import StartPoint, EndPoint, add_line_to_status
+from mesh.events import StartPoint, EndPoint
+from mesh.events import EventsOperations as eo
 
 def test_create_event_queue():
     """Tests if the event queue is created correctly, with all events in their
@@ -47,11 +48,11 @@ def test_add_line_to_status():
     line5 = Line(Point(91.3,179.7), Point(760.645, 353.15446))
     line6 = Line(Point(91.3,179.7), Point(760.645, 353.15446))
 
-    add_line_to_status(line1, status)
-    add_line_to_status(line2, status)
-    add_line_to_status(line3, status)
-    add_line_to_status(line4, status)
-    add_line_to_status(line5, status)
-    add_line_to_status(line6, status)
+    eo.add_line_to_status(line1, status)
+    eo.add_line_to_status(line2, status)
+    eo.add_line_to_status(line3, status)
+    eo.add_line_to_status(line4, status)
+    eo.add_line_to_status(line5, status)
+    eo.add_line_to_status(line6, status)
 
     assert len(status) == 3
