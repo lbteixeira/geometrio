@@ -51,32 +51,6 @@ def test_point_smaller():
 
     assert result == expected
 
-def test_read_input_file():
-    """Test the method read_input_file."""
-
-    input_file = "..\\mesh\\tests\\data\\input_points.txt"
-    expected = [[91, 179, 760, 353], [874, 890, 648, 114]]
-
-    problem = ProblemSetup()
-    result = problem.read_input_file(input_file)
-
-    assert result == expected
-
-def test_create_lines():
-    """Test the method create_lines."""
-
-    input_list = [[91, 179, 760, 353], [874, 890, 648, 114]]
-    line1 = Line(Point(91, 179), Point(760, 353))
-    line2 = Line(Point(874, 890), Point(648, 114))
-    problem = ProblemSetup()
-
-    expected = [line1, line2]
-    result = problem.create_lines(input_list)
-
-    for res, exp in zip(result, expected):
-        assert res.point1 == exp.point1
-        assert res.point2 == exp.point2
-
 def test_compute_orientation():
     """Test the method _compute_orientation."""
 
