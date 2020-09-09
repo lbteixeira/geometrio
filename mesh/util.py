@@ -45,31 +45,13 @@ class LinePlotter:
 class ProblemSetup():
     """Class to pre-process the input data."""
 
-    @staticmethod
-    def read_input_file(input_file) -> List[float]:
-        """Reads the input file containing the points coordinates.
+    input_file: str
 
-        Parameters
-        ----------
-        input_file : .txt
-            File to be read.
+    def __init__(self, input_file: str):
+        self.input_file = input_file
 
-        Returns
-        -------
-        input_list : List[float]
-            List with the coordinates of the points.
-        """
 
-        input_list = []
-        with open(input_file, "r") as f:
-            for line in f:
-                coords = [int(x) for x in line.split()]
-                input_list.append(coords)
-
-        return input_list
-
-    @staticmethod
-    def create_lines(input_list: List[float]) -> List[Line]:
+    def create_lines(self) -> List[Line]:
         """Creates the lines based on the input file.
 
         Parameters
@@ -82,9 +64,29 @@ class ProblemSetup():
             List of the created lines.
         """
 
+        input_list = self._read_input_file()
+
         lines_list = []
         for coords in input_list:
             new_line = Line(Point(coords[0], coords[1]), Point(coords[2], coords[3]))
             lines_list.append(new_line)
 
         return lines_list
+
+
+    def _read_input_file(self) -> List[float]:
+        """Reads the input file containing the coordinates of the points.
+
+        Returns
+        -------
+        input_list : List[float]
+            List with the coordinates of the points.
+        """
+
+        input_list = []
+        with open(self.input_file, "r") as f:
+            for line in f:
+                coords = [int(x) for x in line.split()]
+                input_list.append(coords)
+
+        return input_list
