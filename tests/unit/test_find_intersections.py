@@ -1,6 +1,6 @@
 """Module to test the algorithms to find intersections between lines."""
 
-from mesh.find_intersections import brute_force
+from mesh.find_intersections import IntersectionFinder
 from mesh.util import ProblemSetup
 
 
@@ -12,6 +12,7 @@ def test_brute_force():
     lines_list = ps.create_lines(input_list)
 
     expected = 1
-    result = brute_force(lines_list)
+    finder = IntersectionFinder(lines_list)
+    result = finder.brute_force()
 
     assert result == expected

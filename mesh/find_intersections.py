@@ -7,31 +7,41 @@ from mesh.primitives import Line
 from mesh.events import EventsQueue
 
 
-def brute_force(lines_list: List[Line]) -> int:
-    """Brute force method. Verifies all line pairs.
+class IntersectionFinder():
+    """Class containing methods to find intersections between sets of lines."""
 
-    Parameters
-    ----------
-    lines_list : List[Line]
-        List of lines.
+    lines_list: List[Line]
 
-    Returns
-    -------
-    number_of_intersections : int
-    """
+    def __init__(self, lines_list: List[Line]):
+        self.lines_list = lines_list
 
-    number_of_intersections = 0
-    for line1 in lines_list:
-        for line2 in lines_list:
-            if line1.do_intersect(line2) and line1 != line2:
-                number_of_intersections += 1
+    def brute_force(self) -> int:
+        """Brute force method (naive). Verifies all line pairs.
 
-    return int(number_of_intersections / 2)
+        Returns
+        -------
+        number_of_intersections : int
+        """
 
-def line_sweep(lines_list: List[Line]):
+        number_of_intersections = 0
+        for line1 in self.lines_list:
+            for line2 in self.lines_list:
+                if line1.do_intersect(line2) and line1 != line2:
+                    number_of_intersections += 1
 
-    events = EventsQueue(lines_list)
+        return int(number_of_intersections / 2)
 
-    while events.queue:
-        new_event = events.queue.pop()
-        new_event.handle_event()
+
+    def line_sweep(self):
+        """Line sweep method.
+
+        Returns
+        -------
+        number_of_intersections : int
+        """
+
+        events = EventsQueue(self.lines_list)
+
+        while events.queue:
+            new_event = events.queue.pop()
+            new_event.handle_event()
