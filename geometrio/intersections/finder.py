@@ -2,6 +2,7 @@
 set of lines."""
 
 from typing import List
+from abc import abstractmethod
 
 from geometrio.intersections.primitives import Line
 from geometrio.intersections.events import EventsQueue
@@ -15,13 +16,27 @@ class IntersectionFinder():
     def __init__(self, lines_list: List[Line]):
         self.lines_list = lines_list
 
-    def brute_force(self) -> int:
-        """Brute force method (naive). Verifies all line pairs.
+    @abstractmethod
+    def initialize(self):
+        """Initializes the problem."""
+
+    @abstractmethod
+    def execute(self) -> int:
+        """Executes the intersection finding job.
 
         Returns
         -------
         number_of_intersections : int
         """
+
+
+class BruteForce(IntersectionFinder):
+    """Brute force method (naive). Verifies all line pairs."""
+
+    def initialize(self) -> int:
+        """This calculation method is initialized upon the call to __ini__"""
+
+    def execute(self) -> int:
 
         number_of_intersections = 0
         for line1 in self.lines_list:
@@ -32,16 +47,17 @@ class IntersectionFinder():
         return int(number_of_intersections / 2)
 
 
-    def line_sweep(self):
-        """Line sweep method.
+class LineSweep(IntersectionFinder):
+    """Line sweep method."""
 
-        Returns
-        -------
-        number_of_intersections : int
-        """
+    events: EventsQueue
 
-        events = EventsQueue(self.lines_list)
+    def initialize(self):
 
-        while events.queue:
-            new_event = events.queue.pop()
+        self.events = EventsQueue(self.lines_list)
+
+    def execute(self):
+
+        while self.events.queue:
+            new_event = self.events.queue.pop()
             new_event.handle_event()
