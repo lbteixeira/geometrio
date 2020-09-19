@@ -34,7 +34,7 @@ class BruteForce(IntersectionFinder):
     """Brute force method (naive). Verifies all line pairs."""
 
     def initialize(self) -> int:
-        """This calculation method is initialized upon the call to __ini__"""
+        """This calculation method is initialized upon the call to __init__"""
 
     def execute(self) -> int:
 

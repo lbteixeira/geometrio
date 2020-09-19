@@ -8,6 +8,7 @@ class Point:
     coord_y: float
     point_id: int
     point_count: int = 0
+    which_line: int
 
     def __init__(self, x: float, y: float):
         self.coord_x = x
@@ -83,6 +84,8 @@ class Line:
         self.point1 = point1
         self.point2 = point2
         self.line_id = Line.line_count + 1
+        self.point1.which_line = self.line_id
+        self.point2.which_line = self.line_id
         Line.line_count += 1
 
     def __eq__(self, other_line) -> bool:
