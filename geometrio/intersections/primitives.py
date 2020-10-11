@@ -1,4 +1,4 @@
-"""Module defining prilitives operations (lines and points)."""
+"""Module defining primitive objects (lines and points)."""
 
 
 class Point:
@@ -10,10 +10,10 @@ class Point:
     point_count: int = 0
 
     def __init__(self, x: float, y: float):
+        Point.point_count += 1
         self.coord_x = x
         self.coord_y = y
-        self.point_id = Point.point_count + 1
-        Point.point_count += 1
+        self.point_id = Point.point_count
 
     def __eq__(self, other_point, tol: float = 10**(-6)) -> bool:
 
@@ -24,7 +24,7 @@ class Point:
 
     @staticmethod
     def _is_equal(value1: float, value2: float, tol: float):
-        """Chacks if two values are equal within a given tolerance.
+        """Checks if two values are equal within a given tolerance.
 
         Parameters
         ----------
@@ -80,10 +80,10 @@ class Line:
     line_count: int = 0
 
     def __init__(self, point1: Point, point2: Point):
+        Line.line_count += 1
         self.point1 = point1
         self.point2 = point2
-        self.line_id = Line.line_count + 1
-        Line.line_count += 1
+        self.line_id = Line.line_count
 
     def __eq__(self, other_line) -> bool:
         return self.point1 == other_line.point1 and \

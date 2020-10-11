@@ -7,7 +7,7 @@ from geometrio.intersections.util import ProblemSetup
 def test_brute_force():
     """Test the brute force method to find intersections."""
 
-    ps = ProblemSetup("..\\geometrio\\tests\\data\\input_points.txt")
+    ps = ProblemSetup("../geometrio/tests/data/input_points.txt")
     finder = IntersectionFinder(ps.create_lines())
     result = finder.brute_force()
 
