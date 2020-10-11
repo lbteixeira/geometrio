@@ -25,7 +25,7 @@ class EventsOperations():
 
     @staticmethod
     def check_which_line(point: Point) -> int:
-        """Checks to which line a point is part of.
+        """Checks which line a point is part of.
 
         TODO: verify case where two lines share a point.
 

@@ -8,6 +8,7 @@ class Point:
     coord_y: float
     point_id: int
     point_count: int = 0
+    which_line: int
 
     def __init__(self, x: float, y: float):
         Point.point_count += 1
