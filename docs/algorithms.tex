@@ -1,0 +1,100 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage[noend]{algpseudocode}
+
+\title{Computational Geometry Algorithms}
+\author{Lucas Teixeira}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Convex Hull}
+
+\subsection{Convex Hull $-$ Naive}
+
+\begin{algorithm}
+\caption{$ConvexHullNaive(P)$}
+\textit{Input.} A set $P$ of points in the plane. \\
+\textit{Output.} A list $\mathcal{L}$ containing the vertices of $\mathcal{CH}(P)$ in clockwise order.
+\begin{algorithmic}[1]
+    \State{$E \gets 0$}
+    \For{all ordered pairs $(p, q) \in P \times P$ with $p$ not equal to $q$}
+        \State{\textit{valid} $\gets$ \textbf{true}}
+        \For{all points in $r \in P$ not equal to $p$ or $q$}
+            \If{$r$ lies to the left of the directed line from $p$ to $q$}
+                \State{\textit{valid} $\gets$ \textbf{false}}
+            \EndIf{}
+        \EndFor{}
+        \If{\textit{valid}}
+            \State{Add the directed edge $\overrightarrow{pq}$ to $E$}
+        \EndIf{}
+    \EndFor{}
+    \State{From the set $E$ of edges construct a list $\mathcal{L}$ of vertices of $\mathcal{CH}(P)$, sorted in clockwise order.}
+\end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Questions:}
+\begin{enumerate}
+  \item How to know if a point is to the left of a line segment?
+  \item How to sort the vertices in clockwise order?
+  \item How to know if two points are equal?
+\end{enumerate}
+
+\subsubsection{Objects, attributes and methods:}
+\begin{enumerate}
+  \item Points (Vertices)
+        \begin{itemize}
+          \item Attributes:
+                \begin{itemize}
+                  \item Id [int]
+                  \item Coordinates x and y [Tuple (float, float)]
+                \end{itemize}
+        \end{itemize}
+  \item Lines (Edges)
+        \begin{itemize}
+          \item Attributes:
+                \begin{itemize}
+                  \item Id [int]
+                  \item Points v1 and v2 [Tuple (point, point)]
+                \end{itemize}
+          \item Methods:
+               \begin{itemize}
+                  \item For a given point, verify if the line is at its right
+               \end{itemize}
+        \end{itemize}
+\end{enumerate}
+
+\subsubsection{Data structures}
+A list capable of sorting the points as they are included. The same point shouldn't be included twice.
+
+% \subsection{Convex Hull - Fast}
+
+% \begin{algorithm}[H]
+% \caption{ConvexHull($P$)}
+%     \begin{algorithmic}
+%         \STATE{} \textit{Input.} A set $P$ of points in the plane.
+%         \STATE{} \textit{Output.} A list $\mathcal{L}$ containing the vertices of $\mathcal{CH}(P)$ in clockwise order.
+
+%         1. Sort the points by x-coordinate, resulting in a sequence $p_{1}, ..., p_{n}$ \\
+%         2. Put the points $p_{1}$ and $p_{2}$ in a list $\mathcal{L}_{upper}$, with $p_{1}$ as the first point \\
+%         3. \textbf{for} $i \gets 3$ to $n$ \\
+%         4. \quad \textbf{do} Append $p_{i}$ to $\mathcal{L}_{upper}$ \\
+%         5. \quad \quad \textbf{while} $\mathcal{L}_{upper}$ contains more than two points \textbf{and} the last three points in $\mathcal{L}_{upper}$ do not make a right turn \\
+%         6. \quad \quad \quad \textbf{do} Delete the middle of the last three points from $\mathcal{L}_{upper}$ \\
+%         7. Put the points $p_{n}$ and $p_{n-1}$ in a list $\mathcal{L}_{lower}$, with $p_{n}$ as the first point \\
+%         8. \textbf{for} $i \gets (n - 2)$ \textbf{downto} 1 \\
+%         9. \quad \textbf{do} Append $p_{i}$ to $\mathcal{L}_{lower}$ \\
+%         10. \quad \quad \textbf{while} $\mathcal{L}_{lower}$ contains more than 2 points \textbf{and} the last three points in $\mathcal{L}_{lower}$ do not make a right turn \\
+%         11. \quad \quad \quad \textbf{do} Delete the middle of the last three points from $\mathcal{L}_{lower}$ \\
+%         12. Remove the first and the last point from $\mathcal{L}_{lower}$ to avoid duplication of the points where the upper and lower hull meet \\
+%         13. Append $\mathcal{L}_{lower}$ to $\mathcal{L}_{upper}$, and call the resulting list $\mathcal{L}$ \\
+%         14. \textbf{return} $\mathcal{L}$
+%     \end{algorithmic}
+% \end{algorithm}
+
+\end{document}
