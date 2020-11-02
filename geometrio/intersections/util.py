@@ -50,7 +50,6 @@ class ProblemSetup():
     def __init__(self, input_file: str):
         self.input_file = input_file
 
-
     def create_lines(self) -> List[Line]:
         """Creates the lines based on the input file.
 
@@ -72,7 +71,6 @@ class ProblemSetup():
             lines_list.append(new_line)
 
         return lines_list
-
 
     def _read_input_file(self) -> List[float]:
         """Reads the input file containing the coordinates of the points.

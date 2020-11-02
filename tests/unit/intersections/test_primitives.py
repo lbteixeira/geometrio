@@ -14,11 +14,12 @@ def test_get_intersection_point():
     line5 = Line(Point(-1, 0), Point(1, 0))
 
     expected = [Point(0.5, 0.5), Point(1, 1), Point(0, 0)]
-    result = [line1.get_intersection_point(line2), \
-              line1.get_intersection_point(line3), \
+    result = [line1.get_intersection_point(line2),
+              line1.get_intersection_point(line3),
               line4.get_intersection_point(line5)]
 
     assert result == expected
+
 
 def test_point_equal():
     """Tests if the equality operator was correctly overriden."""
@@ -37,6 +38,7 @@ def test_point_equal():
     assert p4 == p5
     assert p4 != p6
 
+
 def test_point_smaller():
     """Tests if the lower than operator was correctly overriden."""
 
@@ -49,6 +51,7 @@ def test_point_smaller():
     expected = [True, True, False]
 
     assert result == expected
+
 
 def test_compute_orientation():
     """Test the method _compute_orientation."""
@@ -66,6 +69,7 @@ def test_compute_orientation():
     expected = [-1, 1, 0]
 
     assert result == expected
+
 
 def test_do_intersect():
     """Test the method do_intersect."""

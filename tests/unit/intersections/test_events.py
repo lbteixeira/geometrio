@@ -12,6 +12,7 @@ from geometrio.intersections.primitives import Line, Point
 from geometrio.intersections.events import StartPoint, EndPoint
 from geometrio.intersections.events import EventsOperations as eo
 
+
 def test_create_event_queue():
     """Tests if the event queue is created correctly, with all events in their
     expected position"""
@@ -21,7 +22,7 @@ def test_create_event_queue():
 
     events = EventsQueue([line1, line2])
 
-    expected_points = [Point(648, 114), Point(91, 179), \
+    expected_points = [Point(648, 114), Point(91, 179),
                        Point(760, 353), Point(874, 890)]
 
     point1 = events.queue._getitem(0).point
@@ -44,9 +45,9 @@ def test_add_line_to_status():
     line1 = Line(Point(91, 179), Point(760, 353))
     line2 = Line(Point(874, 890), Point(648, 114))
     line3 = Line(Point(91, 179), Point(760, 353))
-    line4 = Line(Point(91,179), Point(760, 353))
-    line5 = Line(Point(91.3,179.7), Point(760.645, 353.15446))
-    line6 = Line(Point(91.3,179.7), Point(760.645, 353.15446))
+    line4 = Line(Point(91, 179), Point(760, 353))
+    line5 = Line(Point(91.3, 179.7), Point(760.645, 353.15446))
+    line6 = Line(Point(91.3, 179.7), Point(760.645, 353.15446))
 
     eo.add_line_to_status(line1, status)
     eo.add_line_to_status(line2, status)
