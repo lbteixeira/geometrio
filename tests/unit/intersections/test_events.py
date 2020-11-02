@@ -7,7 +7,7 @@ TODO: Test add_line_to_status with computation errors
 from sortedcontainers import SortedList
 
 from geometrio.intersections.events import EventsQueue
-from geometrio.intersections.primitives import Line, Point
+from geometrio.primitives.primitives import Line, Point
 
 from geometrio.intersections.events import StartPoint, EndPoint
 from geometrio.intersections.events import EventsOperations as eo

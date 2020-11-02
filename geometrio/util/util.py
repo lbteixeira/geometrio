@@ -4,7 +4,7 @@ from typing import List
 
 import matplotlib.pyplot as plt
 
-from geometrio.intersections.primitives import Point, Line
+from geometrio.primitives.primitives import Point, Line
 
 
 class LinePlotter:

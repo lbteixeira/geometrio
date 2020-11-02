@@ -4,7 +4,7 @@ set of lines."""
 from typing import List
 from abc import abstractmethod
 
-from geometrio.intersections.primitives import Line
+from geometrio.primitives.primitives import Line
 from geometrio.intersections.events import EventsQueue
 
 

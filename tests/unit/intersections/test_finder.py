@@ -1,7 +1,7 @@
 """Module to test the algorithms to find intersections between lines."""
 
 from geometrio.intersections.finder import BruteForce
-from geometrio.intersections.util import ProblemSetup
+from geometrio.util.util import ProblemSetup
 
 
 def test_brute_force():
