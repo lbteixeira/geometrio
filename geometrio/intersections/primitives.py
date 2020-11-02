@@ -1,4 +1,5 @@
 """Module defining primitive objects (lines and points)."""
+from math import isclose
 
 
 class Point:
@@ -16,31 +17,12 @@ class Point:
         self.coord_y = y
         self.point_id = Point.point_count
 
-    def __eq__(self, other_point, tol: float = 10**(-6)) -> bool:
+    def __eq__(self, other_point, tol: float = 10 ** (-6)) -> bool:
 
-        x_is_equal = self._is_equal(self.coord_x, other_point.coord_x, tol)
-        y_is_equal = self._is_equal(self.coord_y, other_point.coord_y, tol)
+        x_is_equal = isclose(self.coord_x, other_point.coord_x, rel_tol=tol)
+        y_is_equal = isclose(self.coord_y, other_point.coord_y, rel_tol=tol)
 
         return x_is_equal and y_is_equal
-
-    @staticmethod
-    def _is_equal(value1: float, value2: float, tol: float):
-        """Checks if two values are equal within a given tolerance.
-
-        Parameters
-        ----------
-        value1 : float
-        value2 : float
-        tol : float
-            Tolerance
-        """
-
-        if value1 == 0:
-            is_equal = abs((value1 - value2)) < tol
-        else:
-            is_equal = abs((value1 - value2)) /  value1 < tol
-
-        return is_equal
 
     def __lt__(self, other_point) -> bool:
         """Overrides the lower than operator.
@@ -63,8 +45,7 @@ class Point:
 
         if self.coord_y < other_point.coord_y:
             is_smaller = True
-        elif self.coord_y == other_point.coord_y and \
-             self.coord_x > other_point.coord_x:
+        elif self.coord_y == other_point.coord_y and self.coord_x > other_point.coord_x:
             is_smaller = True
         else:
             is_smaller = False
@@ -87,8 +68,7 @@ class Line:
         self.line_id = Line.line_count
 
     def __eq__(self, other_line) -> bool:
-        return self.point1 == other_line.point1 and \
-               self.point2 == other_line.point2
+        return self.point1 == other_line.point1 and self.point2 == other_line.point2
 
     def __lt__(self, other_line) -> bool:
         higher_self = self._get_higher_point()
@@ -124,11 +104,13 @@ class Line:
         x3, y3 = other_line.point1.coord_x, other_line.point1.coord_y
         x4, y4 = other_line.point2.coord_x, other_line.point2.coord_y
 
-        x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) \
-            / ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4))
+        x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / (
+            (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        )
 
-        y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) \
-            / ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4))
+        y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / (
+            (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        )
 
         return Point(x, y)
 
