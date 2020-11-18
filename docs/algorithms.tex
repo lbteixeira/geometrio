@@ -1,21 +1,227 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[twoside,12pt, a4paper]{memoir}
 \usepackage[utf8]{inputenc}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
 \usepackage{algorithm}
 \usepackage{amsmath}
 \usepackage[noend]{algpseudocode}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=red,
+}
+\algnewcommand\And{\textbf{and}}
 
-\title{Computational Geometry Algorithms}
+\usepackage[top=3cm, bottom=3cm, left=2.5cm, right=2.5cm, bindingoffset=1cm]{geometry}
+
+\title{Notes on Computational Geometry Algorithms}
 \author{Lucas Teixeira}
 \date{\today}
 
 \begin{document}
-
+\setcounter{secnumdepth}{3}
 \maketitle
+\tableofcontents
+
+\chapter{Preface}\label{sec:intro}
+
+Imagine yourself running all excited to your best friend to say that, after two weeks of intense work, you finally managed to implement an algorithm to check if a point lies inside or outside a polygon (we are going to learn this in Section~\ref{sec:point}). He could easily answer you: ``Yeah$\ldots$ right$\ldots$ but I guess even a small child could tell you that very easily. Actually, if you give me two weeks, I can even train a chimpanzee to do that!''. Perhaps your friends aren't as mean as mine, but you got the point.
+
+\chapter{Point inclusion in a polygon}\label{sec:point}
+
+The first problem we want to solve is:
+
+Given a point $q$ and a polygon $P$, determine if $q$ is inside or outside $P$.
+
+Here are some important definitions and conventions:
+
+\begin{enumerate}
+  \item The vertices of $P$ will be organized in counterclockwise direction, i.e., the interior of the polygon is at the left of the line determined by two consecutive vertices Figure~\ref{}.
+  \item A polygon $P$ is convex if along with any two points $a, b \in P$, it contains the entire segment $ab$ (Figure~\ref{}). None of its vertices exceeds $\pi$.
+  \item A polygon $P$ is non-convex if for any two points $a, b \in P$, it doesn't contain the entire segment $ab$ (Figure~\ref{}). It necessarily have at least one vertex exceeding $\pi$.
+\end{enumerate}
+
+\section{Basic algorithm}\label{subsec:point-basic}
+
+One of the most simple algorithms that could be used to solve this problem is:
+
+\begin{algorithm}
+\caption{$PointInclusion(q, P)$}
+\textit{Input.} A point $q$ and a polygon $P$. \\
+\textit{Output.} If the point is inside the polygon or not (boolean).
+\begin{algorithmic}[1]
+    \State{Draw a horizontal line $l_{0r}$ from $q$ to its left}
+    \State{Move from infinity to $q$, following $l_{0r}$, and count the number $N$ of intersections of $l_{0r}$ with $P$}
+    \If{$N$ is odd}
+        \State{$q$ is inside $P$}
+    \Else{}
+        \State{$q$ is outside $P$}
+    \EndIf{}
+\end{algorithmic}\label{inclusion-naive}
+\end{algorithm}
+
+Algorithm~\ref{inclusion-naive} is extremely simple, and any person could follow it without any problems. Nevertheless, when it comes to its computational implementation, some questions arise:
+
+\begin{itemize}
+  \item How exactly one can draw a line from a point to its left?
+  \item How to move from the infinity to a point?
+  \item More importantly, how to check if two lines ($l_{0r}$ and a vertex of $P$) intersect each other?
+\end{itemize}
+
+Here is where we need to start to \textit{think computationally}. First, we don't \textit{actually} need to draw a line from $q$ to its left. Since we know we are working with a horizontal line, we only need to know the coordinates of point $q$, and that's it.
+
+Second, we are not going to move from the infinity to the point $q$, this is only a figure of speech, let's say. What we are actually going to do will be clear in a minute.
+
+The third question is more interesting. The conditions to say if a horizontal line passing through $q$ intersects an arbitrary line $l_{ab}$ are:
+
+\begin{enumerate}
+  \item The lower point of $l_{ab}$ lies below $q$.
+  \item The upper point of $l_{ab}$ lies above $q$.
+  \item $q$ lies to the right from the line $\overrightarrow{l}_{ab}$, that goes from $a$ to $b$.
+\end{enumerate}
+
+But this doesn't really help, since we have now two \textit{extra} questions:
+
+\begin{enumerate}
+\setcounter{enumi}{3}
+  \item how to know if a point lies above or below another one?
+  \item how to know if a point lies to the right of a line?
+\end{enumerate}
+
+Mathematically speaking, the answer to Question 4 is straightforward: a point $a$ lies below a point $q$ if $a_{y} < q_{y}$. For Question 5 the answer is$\ldots$
+
+A point $q$ lies to the right of a line $\overrightarrow{l}_{ab}$ if the points $a$, $b$ and $q$ make a right turn, or if the signed area of the triangle $\Delta abq$ is negative.
+
+Ok, I know what you are thinking$\ldots$ This is never going to end! How can I know if three points make a right turn?! Bare with me, I'm about to tell you. Three points $abc$ (organized in this order) make a right turn if:
+
+\begin{equation}
+  \label{eq:turn}
+  \begin{split}
+  2 \times \text{Area} (\Delta abc) = &
+      \begin{vmatrix}
+        a_{x} & a_{y} & 1 \\
+        b_{x} & b_{y} & 1 \\
+        c_{x} & c_{y} & 1
+      \end{vmatrix} \\
+  & = (b_{x}-a_{y})(c_{y}-a_{y})-(c_{x}-a_{x})(b_{y}-a_{y}) < 0
+  \end{split}
+\end{equation}
+
+As a special case, if the expression above equals 0, the points $a$, $b$ and $c$ are collinear. We can now revisit Algorithm~\ref{inclusion-naive} and make it more tangible:
+
+\begin{algorithm}
+\caption{$PointInclusion(q, P)$ $-$ Revisited}
+\textit{Input.} A point $q$ and a polygon $P$. \\
+\textit{Output.} If the point is inside the polygon or not (boolean).
+\begin{algorithmic}[1]
+  \State{$N \gets 0$}
+  \For{all edges $e_{ab}$ of $P$, where $a$ is the lower and $b$ is the upper point}
+    \If{$a_{y} < q_{y}$ \textbf{and} $b_{y} > q_{y}$ \textbf{and} Equation~\ref{eq:turn} is satisfied}
+      \State{$N = N + 1$}
+    \EndIf{}
+  \EndFor{}
+
+  \If{$N$ is odd}
+    \State{$q$ is inside $P$}
+  \Else{}
+    \State{$q$ is outside $P$}
+  \EndIf{}
+\end{algorithmic}\label{inclusion-revisited}
+\end{algorithm}
+
+\subsection{Implementation}\label{subsec:label}
 
 
-\section{Convex Hull}
+\section{Degenerated cases}\label{subsec:point-degenerated}
 
-\subsection{Convex Hull $-$ Naive}
+\begin{itemize}
+  \item \textbf{Case 1}: The line $r$ crosses the boundary of $P$ at a vertex $b$ there is part of two non-horizontal edges $ab$ and $bc$.
+        \begin{itemize}
+          \item The intersection with $r$ will be reported for both edges $ab$ and $bc$
+          \item We should increment $N$ only for the edge(s) with the lower endpoint at $b$. There might be zero,  one or two of such case.
+        \end{itemize}
+
+  \item \textbf{Case 2}: $P$ has one or a few horizontal edges, and some of those fall on the line $r$.
+        \begin{itemize}
+          \item Ignore the horizontal edges
+        \end{itemize}
+\end{itemize}
+
+\begin{algorithm}
+\caption{$PointInclusion(q, P) - $ Revisited}
+\textit{Input.} A point $q$ and a polygon $P$. \\
+\textit{Output.} If the point is inside the polygon or not (boolean).
+\begin{algorithmic}[1]
+    \State{Draw a horizontal line $r$ from $q$ to its left}
+    \For{all edges $l_{p}$ of $P$ that are non-horizontal}
+      \If{$l_{p}$ intersects $r$ at a point other than its upper endpoint}
+        \State{$N=N+1$}
+      \EndIf{}
+    \EndFor{}
+
+    \If{$N$ is odd}
+        \State{$q$ is inside $P$}
+    \Else{}
+        \State{$q$ is outside $P$}
+    \EndIf{}
+\end{algorithmic}\label{inclusion}
+\end{algorithm}
+
+\section{Special case $-$ Convex polygons}\label{subsec:point-convex}
+
+
+Definition: a vertex which has its angle exactly equal $\pi$ is called ``degenerated''.
+
+Tip: eliminate degenerated vertices.
+
+A non-convex polygon can be subdivided into convex parts.
+
+Spend time in pre-processing.
+
+\begin{equation}
+  \label{center-mass}
+  C_{m} = \left ( \dfrac{v_{x} + u_{x} + w_{x}}{3}, \dfrac{v_{y} + u_{y} + w_{y}}{3} \right )
+\end{equation}
+
+\begin{equation}
+  \label{tangent}
+  \tan{\alpha} = \dfrac{q_{y} - z_{y}}{q_{x} - z_{x}}
+\end{equation}
+
+
+
+\begin{algorithm}
+  \caption{$PointInclusionInConvexPolygon(q, P)$}
+  \textit{Input.} A point $q$ and a convex polygon $P$. \\
+  \textit{Output.} If the point is inside the polygon or not (boolean).
+  \begin{algorithmic}[1]
+    \State{Select three non-collinear vertices $a$, $b$ and $c$ of $P$.}
+    \State{Calculate the points' center of mass $z$.}
+
+    \For{each vertex $v$ of $P$}
+      \State{Calculate the tangent of the angle $\alpha_{v}$ between an horizontal line $l_{0z}$ and $\overrightarrow{l}_{vz}$}
+    \EndFor{}
+
+    \State{Compute the angle $\beta$ between an horizontal line $l_{0z}$ and $\overrightarrow{l}_{qz}$}
+    \State{The point $q$ is located at the wedge where $\tan{\alpha_{v_{1}}} < \tan{\beta} < \tan{\alpha_{v_{2}}}$}, being $v_{1}$ and $v_{2}$ two consecutive vertices of $P$.
+
+    \If{$q$ is at the left of the edge $e$ of $P$ contained in this wedge}
+      \State{$q$ is inside $P$}
+    \Else{}
+      \State{$q$ is outside $P$}
+    \EndIf{}
+
+  \end{algorithmic}
+\end{algorithm}
+
+Time complexity: $O(\log{n})$, where $n$ is the number of vertices of $P$. For the preprocessing it is required $O(n)$ time. Memory requirements: $O(n)$.
+
+
+\chapter{Convex Hull}
+
+\section{Convex Hull $-$ Naive}
 
 \begin{algorithm}
 \caption{$ConvexHullNaive(P)$}
@@ -72,7 +278,7 @@
 \subsubsection{Data structures}
 A list capable of sorting the points as they are included. The same point shouldn't be included twice.
 
-% \subsection{Convex Hull - Fast}
+% \section{Convex Hull - Fast}
 
 % \begin{algorithm}[H]
 % \caption{ConvexHull($P$)}
