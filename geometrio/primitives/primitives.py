@@ -43,12 +43,11 @@ class Point:
             True if the current point is smaller, False otherwise.
         """
 
+        is_smaller = False
         if self.coord_y < other_point.coord_y:
             is_smaller = True
-        elif self.coord_y == other_point.coord_y and self.coord_x > other_point.coord_x:
+        elif isclose(self.coord_y, other_point.coord_y, rel_tol=10 ** (-6)) and self.coord_x > other_point.coord_x:
             is_smaller = True
-        else:
-            is_smaller = False
 
         return is_smaller
 
