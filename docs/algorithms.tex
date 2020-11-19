@@ -94,22 +94,22 @@ Mathematically speaking, the answer to Question 4 is straightforward: a point $a
 
 A point $q$ lies to the right of a line $\overrightarrow{l}_{ab}$ if the points $a$, $b$ and $q$ make a right turn, or if the signed area of the triangle $\Delta abq$ is negative.
 
-Ok, I know what you are thinking$\ldots$ This is never going to end! How can I know if three points make a right turn?! Bare with me, I'm about to tell you. Three points $abc$ (organized in this order) make a right turn if:
+Ok, I know what you are thinking$\ldots$ This is never going to end! How can I know if three points make a right turn?! Bare with me, I'm about to tell you. Three points $abq$ (organized in this order) make a right turn if:
 
 \begin{equation}
   \label{eq:turn}
   \begin{split}
-  2 \times \text{Area} (\Delta abc) = &
+  2 \times \text{Area} (\Delta abq) = &
       \begin{vmatrix}
         a_{x} & a_{y} & 1 \\
         b_{x} & b_{y} & 1 \\
-        c_{x} & c_{y} & 1
+        q_{x} & q_{y} & 1
       \end{vmatrix} \\
-  & = (b_{x}-a_{y})(c_{y}-a_{y})-(c_{x}-a_{x})(b_{y}-a_{y}) < 0
+  & = (b_{x}-a_{x})(q_{y}-a_{y})-(q_{x}-a_{x})(b_{y}-a_{y}) < 0
   \end{split}
 \end{equation}
 
-As a special case, if the expression above equals 0, the points $a$, $b$ and $c$ are collinear. We can now revisit Algorithm~\ref{inclusion-naive} and make it more tangible:
+As a special case, if the expression above equals 0, the points $a$, $b$ and $q$ are collinear. We can now revisit Algorithm~\ref{inclusion-naive} and make it more tangible:
 
 \begin{algorithm}
 \caption{$PointInclusion(q, P)$ $-$ Revisited}
