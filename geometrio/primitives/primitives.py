@@ -51,6 +51,25 @@ class Point:
 
         return is_smaller
 
+    def makes_right_turn(self, point_a, point_b) -> bool:
+       """Checks if the points abc make a right turn
+
+       c is the current point.
+       """
+       ax = point_a.coord_x
+       ay = point_a.coord_y
+       bx = point_b.coord_x
+       by = point_b.coord_y
+       cx = self.coord_x
+       cy = self.coord_y
+
+       area = (bx - ax)*(cy - ay) - (cx - ax)*(by - ay)
+
+       makes_right_turn = False
+       if area < 0:
+           makes_right_turn = True
+
+       return makes_right_turn
 
 class Line:
     """Class representing a line segment."""
