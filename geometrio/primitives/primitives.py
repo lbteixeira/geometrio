@@ -1,5 +1,6 @@
 """Module defining primitive objects (lines and points)."""
 from math import isclose
+from typing import List
 
 
 class Point:
@@ -51,17 +52,27 @@ class Point:
 
         return is_smaller
 
+    def is_at_right(self, line) -> bool:
+        """Check if the point is at the right of a line"""
+        ordered_points = line.order_points()
+        a = ordered_points[0]
+        b = ordered_points[1]
+
+        if a.coord_y < self.coord_y and b.coord_y > self.coord_y and \
+           self.makes_right_turn(a, b):
+            return True
+        else:
+            return False
+
+
     def makes_right_turn(self, point_a, point_b) -> bool:
        """Checks if the points abc make a right turn
 
        c is the current point.
        """
-       ax = point_a.coord_x
-       ay = point_a.coord_y
-       bx = point_b.coord_x
-       by = point_b.coord_y
-       cx = self.coord_x
-       cy = self.coord_y
+       ax, ay = point_a.coord_x, point_a.coord_y
+       bx, by = point_b.coord_x, point_b.coord_y
+       cx, cy = self.coord_x, self.coord_y
 
        area = (bx - ax)*(cy - ay) - (cx - ax)*(by - ay)
 
@@ -70,6 +81,7 @@ class Point:
            makes_right_turn = True
 
        return makes_right_turn
+
 
 class Line:
     """Class representing a line segment."""
@@ -89,20 +101,21 @@ class Line:
         return self.point1 == other_line.point1 and self.point2 == other_line.point2
 
     def __lt__(self, other_line) -> bool:
-        higher_self = self._get_higher_point()
-        higher_other = other_line._get_higher_point()
+        ordered_self = self.order_points()
+        ordered_other = other_line.order_points()
 
-        if higher_self < higher_other:
+        if ordered_self[1] < ordered_other[1]:
             return True
         else:
             return False
 
-    def _get_higher_point(self) -> Point:
+    def order_points(self) -> List[Point]:
+        """Order the points of the line"""
 
-        if self.point1 > self.point2:
-            return self.point1
+        if self.point1 < self.point2:
+            return [self.point1, self.point2]
         else:
-            return self.point2
+            return [self.point2, self.point1]
 
     def get_intersection_point(self, other_line) -> Point:
         """Calculates the intersection point between two lines.

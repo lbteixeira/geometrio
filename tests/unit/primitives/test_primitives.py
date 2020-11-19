@@ -4,6 +4,15 @@
 from geometrio.primitives.primitives import Line, Point
 
 
+def test_is_at_right():
+    """Tests the function is_at_right"""
+    line = Line(Point(1.32, 0.1), Point(2.7, 2.01))
+    point1 = Point(2.0, 1.0)
+
+    result = point1.is_at_right(line)
+    assert result
+
+
 def test_makes_right_turn():
     """Tests if three points make a right turn"""
     point1 = Point(2.0, 1.0)
@@ -12,6 +21,8 @@ def test_makes_right_turn():
 
     result = point1.makes_right_turn(point2, point3)
     assert result
+
+
 def test_get_intersection_point():
     """Tests the function get_intersection_point."""
 
