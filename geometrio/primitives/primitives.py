@@ -29,7 +29,8 @@ class Point:
         """Overrides the lower than operator.
 
         Condition:
-            1. One point will be lower than the other if its y coordinate is lower
+            1. One point will be lower than the other if its y coordinate is
+        lower
             2. If the y coordinates are the same, the one with the smaller x
             coordinate will be smaller
 
@@ -47,7 +48,8 @@ class Point:
         is_smaller = False
         if self.coord_y < other_point.coord_y:
             is_smaller = True
-        elif isclose(self.coord_y, other_point.coord_y, rel_tol=10 ** (-6)) and self.coord_x > other_point.coord_x:
+        elif isclose(self.coord_y, other_point.coord_y, rel_tol=10 ** (-6)) \
+                and self.coord_x > other_point.coord_x:
             is_smaller = True
 
         return is_smaller
@@ -64,26 +66,26 @@ class Point:
         else:
             return False
 
-
     def makes_right_turn(self, point_a, point_b) -> bool:
-       """Checks if the points abc make a right turn
+        """Checks if the points abc make a right turn
 
-       c is the current point.
-       """
-       ax, ay = point_a.coord_x, point_a.coord_y
-       bx, by = point_b.coord_x, point_b.coord_y
-       cx, cy = self.coord_x, self.coord_y
+        c is the current point.
+        """
+        ax, ay = point_a.coord_x, point_a.coord_y
+        bx, by = point_b.coord_x, point_b.coord_y
+        cx, cy = self.coord_x, self.coord_y
 
-       area = (bx - ax)*(cy - ay) - (cx - ax)*(by - ay)
+        area = (bx - ax)*(cy - ay) - (cx - ax)*(by - ay)
 
-       makes_right_turn = False
-       if area < 0:
-           makes_right_turn = True
+        makes_right_turn = False
+        if area < 0:
+            makes_right_turn = True
 
-       return makes_right_turn
+        return makes_right_turn
 
 
 class Line:
+
     """Class representing a line segment."""
 
     point1: Point
@@ -98,7 +100,8 @@ class Line:
         self.line_id = Line.line_count
 
     def __eq__(self, other_line) -> bool:
-        return self.point1 == other_line.point1 and self.point2 == other_line.point2
+        return self.point1 == other_line.point1 and \
+            self.point2 == other_line.point2
 
     def __lt__(self, other_line) -> bool:
         ordered_self = self.order_points()
@@ -135,13 +138,13 @@ class Line:
         x3, y3 = other_line.point1.coord_x, other_line.point1.coord_y
         x4, y4 = other_line.point2.coord_x, other_line.point2.coord_y
 
-        x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / (
-            (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
-        )
+        x = ((x1 * y2 - y1 * x2) * (x3 - x4) -
+             (x1 - x2) * (x3 * y4 - y3 * x4)) / \
+            ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4))
 
-        y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / (
-            (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
-        )
+        y = ((x1 * y2 - y1 * x2) * (y3 - y4) -
+             (y1 - y2) * (x3 * y4 - y3 * x4)) / \
+            ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4))
 
         return Point(x, y)
 
@@ -207,3 +210,20 @@ class Line:
             orientation = 0
 
         return orientation
+
+
+class Polygon():
+    """Class representing a polygon.
+
+    A polygon is a list of lines.
+    """
+
+    lines: List[Line]
+
+    def __init__(self, lines: List[Line]):
+        self.lines = lines
+
+
+if __name__ == "__main__":
+    p = Point(1, 2)
+    a = p.coord_x

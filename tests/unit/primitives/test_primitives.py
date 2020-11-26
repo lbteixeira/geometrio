@@ -6,11 +6,6 @@ from geometrio.primitives.primitives import Line, Point
 
 def test_is_at_right():
     """Tests the function is_at_right"""
-    line = Line(Point(1.32, 0.1), Point(2.7, 2.01))
-    point1 = Point(2.0, 1.0)
-
-    result = point1.is_at_right(line)
-    assert result
 
 
 def test_makes_right_turn():
