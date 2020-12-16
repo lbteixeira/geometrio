@@ -19,13 +19,29 @@ class Point:
         self.point_id = Point.point_count
 
     def __eq__(self, other_point, tol: float = 10 ** (-6)) -> bool:
+        """ Overrides the equality operator.
+
+        Condition: the coordinates x and y are the same for the current and for
+        the other point, given a certain tolerance.
+
+        Parameters
+        ----------
+        other_point : Point
+            Point to be compared with the current point.
+
+        Returns
+        -------
+        is_equal : bool
+            True if the current point is equal to the other, False otherwise.
+
+        """
 
         x_is_equal = isclose(self.coord_x, other_point.coord_x, rel_tol=tol)
         y_is_equal = isclose(self.coord_y, other_point.coord_y, rel_tol=tol)
 
         return x_is_equal and y_is_equal
 
-    def __lt__(self, other_point) -> bool:
+    def __lt__(self, other_point, tol: float = 10 ** (-6)) -> bool:
         """Overrides the lower than operator.
 
         Condition:
@@ -48,14 +64,26 @@ class Point:
         is_smaller = False
         if self.coord_y < other_point.coord_y:
             is_smaller = True
-        elif isclose(self.coord_y, other_point.coord_y, rel_tol=10 ** (-6)) \
+        elif isclose(self.coord_y, other_point.coord_y, rel_tol=tol) \
                 and self.coord_x > other_point.coord_x:
             is_smaller = True
 
         return is_smaller
 
     def is_at_right(self, line) -> bool:
-        """Check if the point is at the right of a line"""
+        """ Check if the point is at the right of a line.
+
+        Parameters
+        ----------
+        line: Line
+            Line against which the point will be checked.
+
+        Returns
+        -------
+        is_at_right : bool
+            True if the point is at the right of the line, False otherwise.
+        """
+
         ordered_points = line.order_points()
         a = ordered_points[0]
         b = ordered_points[1]
@@ -149,7 +177,7 @@ class Line:
         return Point(x, y)
 
     def do_intersect(self, other_line) -> bool:
-        """Verifies if the current line segment intersects another line.
+        """ Verifies if the current line segment intersects another line.
 
         Parameters
         ----------
@@ -213,17 +241,14 @@ class Line:
 
 
 class Polygon():
-    """Class representing a polygon.
+    """ Class representing a polygon.
 
-    A polygon is a list of lines.
+    A polygon is a list of lines which:
+        1 - Don't intersect themselves.
+        2 - Each point is connected to exactly two lines.
     """
 
-    lines: List[Line]
+    edges: List[Line]
 
-    def __init__(self, lines: List[Line]):
-        self.lines = lines
-
-
-if __name__ == "__main__":
-    p = Point(1, 2)
-    a = p.coord_x
+    def __init__(self, edges: List[Line]):
+        self.edges = edges
