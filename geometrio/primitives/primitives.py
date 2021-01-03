@@ -71,36 +71,16 @@ class Point:
         return is_smaller
 
     def is_at_right(self, line) -> bool:
-        """ Check if the point is at the right of a line.
+        """Checks if the point c is at the right of the line composed by 
+        points a and b, i.e., checks if the points abc make a right turn.
 
-        Parameters
-        ----------
-        line: Line
-            Line against which the point will be checked.
-
-        Returns
-        -------
-        is_at_right : bool
-            True if the point is at the right of the line, False otherwise.
         """
-
         ordered_points = line.order_points()
         a = ordered_points[0]
         b = ordered_points[1]
 
-        if a.coord_y < self.coord_y and b.coord_y > self.coord_y and \
-           self.makes_right_turn(a, b):
-            return True
-        else:
-            return False
-
-    def makes_right_turn(self, point_a, point_b) -> bool:
-        """Checks if the points abc make a right turn
-
-        c is the current point.
-        """
-        ax, ay = point_a.coord_x, point_a.coord_y
-        bx, by = point_b.coord_x, point_b.coord_y
+        ax, ay = a.coord_x, a.coord_y
+        bx, by = b.coord_x, b.coord_y
         cx, cy = self.coord_x, self.coord_y
 
         area = (bx - ax)*(cy - ay) - (cx - ax)*(by - ay)
