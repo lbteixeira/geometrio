@@ -5,9 +5,9 @@ from geometrio.inclusion.inclusion import InclusionChecker
 def test_point_inclusion():
     point = Point(0.5, 0.5)
     v1 = Point(0.0, 0.0)
-    v2 = Point(1.0, 1.0)
-    v3 = Point(1.0, 0.0)
-    v4 = Point(0.0, 1.0)
+    v2 = Point(0.9, 0.9)
+    v3 = Point(1.0, 0.1)
+    v4 = Point(0.1, 1.1)
 
     l1 = Line(v1, v3)
     l2 = Line(v1, v4)
