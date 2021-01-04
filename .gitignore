@@ -426,3 +426,5 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 tests/data/polygons.FCStd
+tests/data/test_polygons.FCStd
+tests/data/test_polygons.FCStd1
