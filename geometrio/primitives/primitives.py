@@ -219,6 +219,26 @@ class Line:
 
         return orientation
 
+    def is_horizontal(self, tol: float = 10 ** (-3)):
+        """
+        Checks if a line is horizontal.
+
+        Criteria: the difference between the y coordinates of the two points is below a given tolerance.
+
+        Parameters
+        ----------
+        tol : float
+            tolerance.
+
+        Returns
+        -------
+        True or False.
+        """
+        if isclose(self.point1.coord_y, self.point2.coord_y, abs_tol=tol):
+            return True
+        else:
+            return False
+
 
 class Polygon():
     """ Class representing a polygon.

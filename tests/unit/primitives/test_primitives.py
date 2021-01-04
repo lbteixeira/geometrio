@@ -150,3 +150,22 @@ def test_line_smaller():
     assert line2 > line1
     assert line1 > line3
     assert line3 < line2
+
+
+def test_is_horizontal():
+    """ Tests the method is_horizontal. """
+    point1 = Point(1.0, 0.0)
+    point2 = Point(2.0, 0.01)
+    point3 = Point(2.0, -0.01)
+    point4 = Point(2.0, 0.0001)
+    point5 = Point(2.0, -0.0001)
+
+    line1 = Line(point1, point2)
+    line2 = Line(point1, point3)
+    line3 = Line(point1, point4)
+    line4 = Line(point1, point5)
+
+    assert not line1.is_horizontal()
+    assert not line2.is_horizontal()
+    assert line3.is_horizontal()
+    assert line4.is_horizontal()
